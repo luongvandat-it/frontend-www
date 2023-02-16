@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction Page</title>
+    <link rel="icon" href="../img/logo.avif" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css"
+    />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <script> 
+        $(document).ready(function() {
+            function navTo(where){ 
+                window.location.replace(where); 
+            }
+            $(".col-3").click(function() {
+                var href = $(this).attr("href");
+                navTo(href);
+            });
+
+            $(".col-3").hover(function() {
+                $(this).toggleClass("border-primary");
+            });
+        })
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+        <h1 class="text-center p-3"> 
+            <img src="./img/sitemap.png" height="30px"> 
+            <b>Sitemap</b> 
+            <img src="./img/sitemap.png" height="30px"> 
+        </h1>
+        <div class="row justify-content-center">
+            <div class="col-3 border p-2 m-3" href="index.html">
+                <img src="./img/home_page_icon.png" height="100px">
+                <a class="h4 ml-3">Home page</a>
+            </div>
+
+            <div class="col-3 border p-2 m-3" href="introduction.html">
+                <img src="./img/introducion.png" height="100px">
+                <a class="h4 ml-3">Giới thiệu</a>
+            </div>
+
+            <div class="col-3 border p-2 m-3" href="cart.html">
+                <img src="./img/orders.png" height="100px">
+                <a class="h4 ml-3">Giỏ hàng</a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-3 border p-2 m-3" href="orders.html">
+                <img src="./img/sitemap_orders.png" height="100px">
+                <a class="h4 ml-3">Đơn hàng</a>
+            </div>
+        </div>
+        </div>
+    </div>
+  </body>
+</html>
