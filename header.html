@@ -17,7 +17,6 @@
 
     <script>
       $(document).ready(function () {
-        // Open modal, switch login and register
         $("#btnRegister").click(function () {
           $("#registerModal").modal();
         });
@@ -69,7 +68,6 @@
           }
         });
         
-        // Login check input email and password with regex
         $("#btnSubmitLogin").click(function () {
           var email = $("#txtEmailLogin").val();
           var pass = $("#txtPassLogin").val();
