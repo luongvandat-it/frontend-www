@@ -16,11 +16,16 @@
     <script src="../js/bootstrap.min.js"></script>
 
     <script>
-        
+        $(function () {
+      $(".header").load("header.html");
+      $(".footer").load("footer.html");
+    });
     </script>
   </head>
 
   <body>
+    <div class="header"></div>
+
     <div class="container">
       
       <h2 class="mt-5"> <img src="../img/orders.png" height="50px" class="mr-3 ml-3"> Các đơn hàng của bạn </h2>
@@ -69,5 +74,7 @@
         </div>
       </form>
     </div>
+
+  <div class="footer"></div>
   </body>
 </html>

@@ -107,11 +107,18 @@
             totalPriceOfAProduct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
           );
         });
+
+        $(function () {
+      $(".header").load("header.html");
+      $(".footer").load("footer.html");
+    });
       })
     </script>
   </head>
 
   <body>
+    <div class="header"></div>
+
     <div class="container">
       
       <h2 class="mt-5"> <img src="../img/shopping_cart_icon.png" height="50px"> Giỏ hàng (1 sản phẩm)</h2>
@@ -165,4 +172,5 @@
       </div>
     </div>
   </body>
+  <div class="footer"></div>
 </html>

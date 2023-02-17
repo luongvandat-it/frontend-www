@@ -29,10 +29,17 @@
                 $(this).toggleClass("border-primary");
             });
         })
+
+        $(function () {
+      $(".header").load("header.html");
+      $(".footer").load("footer.html");
+    });
     </script>
   </head>
 
   <body>
+    <div class="header"></div>
+
     <div class="container">
         <h1 class="text-center p-3"> 
             <img src="./img/sitemap.png" height="30px"> 
@@ -64,5 +71,7 @@
         </div>
         </div>
     </div>
+
+    <div class="footer"></div>
   </body>
 </html>

@@ -16,19 +16,19 @@
     <script src="../js/bootstrap.min.js"></script>
 
     <script>
-      $(document).ready(function() {
+      $(document).ready(function () {
         $("#btnConfirmPay").click(function () {
           var name = $("#name").val();
           var email = $("#email").val();
           var phone = $("#phone").val();
           var address = $("#address").val();
-  
+
           var regexName = /^[a-zA-Z ]{2,30}$/;
           var regexEmail =
             /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
           var regexPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
           var regexAddress = /^[a-zA-Z0-9 ]{2,30}$/;
-  
+
           if (regexName.test(name) == false) {
             $("#errPayment").text("Họ tên không hợp lệ");
             return false;
@@ -38,8 +38,7 @@
           } else if (regexPhone.test(phone) == false) {
             $("#errPayment").text("Số điện thoại không hợp lệ");
             return false;
-          } else
-          if (regexAddress.test(address) == false) {
+          } else if (regexAddress.test(address) == false) {
             $("#errPayment").text("Địa chỉ không hợp lệ");
             return false;
           } else {
@@ -47,22 +46,29 @@
             return true;
           }
         });
-      })
+      });
 
-    $(document).ready(function() {
-      $("#clickMomo").click(function() {
-        $("#momo").prop("checked", true);
-        $("#cast").prop("checked", false);
+      $(document).ready(function () {
+        $("#clickMomo").click(function () {
+          $("#momo").prop("checked", true);
+          $("#cast").prop("checked", false);
+        });
+        $("#clickCast").click(function () {
+          $("#cast").prop("checked", true);
+          $("#momo").prop("checked", false);
+        });
+
+        $(function () {
+          $(".header").load("header.html");
+          $(".footer").load("footer.html");
+        });
       });
-      $("#clickCast").click(function() {
-        $("#cast").prop("checked", true);
-        $("#momo").prop("checked", false);
-      });
-    });
     </script>
   </head>
 
   <body>
+    <div class="header"></div>
+
     <div class="container">
       <h2 class="text-center mt-5">XÁC NHẬN THANH TOÁN</h2>
 
@@ -113,7 +119,9 @@
           <div class="form-group">
             <label for="payment">Phương thức thanh toán:</label><br />
             <input type="radio" name="paymentMethod" id="momo" />
-            <a href="#" id="clickMomo"> <img src="./img/momo.png" height="50px" /> Ví Momo</a>
+            <a href="#" id="clickMomo">
+              <img src="./img/momo.png" height="50px" /> Ví Momo</a
+            >
             <br />
             <input type="radio" name="paymentMethod" id="cast" checked />
             <a href="#" id="clickCast">
@@ -212,10 +220,15 @@
       </form>
       <div class="text-danger" id="errPayment"></div>
       <div class="row">
-        <button class="btn btn-block btn-success mb-5 mr-3 ml-3" id="btnConfirmPay">
+        <button
+          class="btn btn-block btn-success mb-5 mr-3 ml-3"
+          id="btnConfirmPay"
+        >
           Xác nhận thanh toán
         </button>
       </div>
     </div>
+
+    <div class="footer"></div>
   </body>
 </html>
