@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/manager.css">
+    <link rel="icon" href="./img/logo.avif">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid" id="PublisherManage">
+        <!-- breadcrumb -->
+        <div class="row m-0">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ Admin</a></li>
+                    <li class="breadcrumb-item">Quản lý sản phẩm</li>
+                    <li class="breadcrumb-item active" aria-current="page">Nhà xuất bản</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- search -->
+        <div class="row border pt-3 pb-3 ml-1 bg-light">
+            <div class="col-5">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 ">
+                        <label class="mr-5" for="">Tìm kiếm:</label>
+                        <input type="text" class="form-control" id="search" placeholder="Tìm kiếm">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <p class="text-info d-inline">sắp xếp:</p>
+                <select class="custom-select sort" style="width:45% ;">
+                    <option value="nameincrease" selected>Tên a-z</option>
+                    <option value="namedecrease" >Tên z-a</option>
+                    <option value="numberincrease" >Số lượng tăng</option>
+                    <option value="numberdecrease" >Số lượng giảm</option>
+                  </select>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-success">Hiển thị tất cả</button>
+                <button type="button" class="btn btn-primary">Thêm mới</button>
+            </div>
+        </div>
+
+        <!-- table -->
+        <div class="row border ml-1">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col"><input type="checkbox" name="chkAll"></th>
+                        <th>Tên nhà xuất bản</th>
+                        <th>Số lượng sách</th>
+                        <th>Hiển thị</th>
+                        <th>Tác vụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="chkRow"></td>
+                        <td>Kim đồng</td>
+                        <td>10</td>
+                        <td><input type="checkbox" name="chkHienThi" id=""></td>
+                        <td><button type="button " class="btn btn-outline-warning ">Sửa</button>
+                            <button type="button " class="btn btn-outline-danger ">Xóa</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="chkRow"></td>
+                        <td>Kim đồng</td>
+                        <td>10</td>
+                        <td><input type="checkbox" name="chkHienThi" id=""></td>
+                        <td><button type="button " class="btn btn-outline-warning ">Sửa</button>
+                            <button type="button " class="btn btn-outline-danger ">Xóa</button></td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- pagination -->
+        <div class="row justify-content-center mt-2">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+
+</html>

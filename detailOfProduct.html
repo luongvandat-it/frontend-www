@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,157 +9,155 @@
     <link rel="icon" href="../img/logo.avif" />
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/all.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css" />
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
-    <script> 
-      $(document).ready(function(){
-        $(".btn").click(function(){
-          var value = $(this).parent().find("button:eq(1)").text();
-          if($(this).text() == "+"){
-            value++;
-          }else{
-            if(value > 0){
-              value--;
-            }
-          }
-          $(this).parent().find("button:eq(1)").text(value);
-        });
+    <script>
+        $(document).ready(function() {
+            $(".btn").click(function() {
+                var value = $(this).parent().find("button:eq(1)").text();
+                if ($(this).text() == "+") {
+                    value++;
+                } else {
+                    if (value > 0) {
+                        value--;
+                    }
+                }
+                $(this).parent().find("button:eq(1)").text(value);
+            });
 
-        $(".btn").click(function(){
-          var value = $(this).parent().find("button:eq(1)").text();
-          if(value > 10){
-            value = 10;
-          }else if(value < 1){
-            value = 1;
-          }
-          $(this).parent().find("button:eq(1)").text(value);
-        });
+            $(".btn").click(function() {
+                var value = $(this).parent().find("button:eq(1)").text();
+                if (value > 10) {
+                    value = 10;
+                } else if (value < 1) {
+                    value = 1;
+                }
+                $(this).parent().find("button:eq(1)").text(value);
+            });
 
-        $(function () {
-      $(".header").load("header.html");
-      $(".footer").load("footer.html");
-    });
-      });
+            $(function() {
+                $(".header").load("header.html");
+                $(".footer").load("footer.html");
+            });
+        });
     </script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="header"></div>
 
     <div class="container justify-content-center text-center">
         <div class="row mt-5">
-          <div class="col-4">
-            <img src="./img/book001_thientrongtungphutgiay.jpg" height="430px">
-          </div>
-
-          <div class="col-8 text-left">
-            <div class="row p-2">
-              <h4><b>Thiền Trong Từng Phút Giây</b></h4>
-            </div>
-            <div class="row mt-4">
-              <div class="col-7"  >
-                <p>Nhà cung cấp: <span class="text-primary">Thái Hà</span></p>
-                <p>Nhà xuất bản: <b>NXB Lao Động</b></p>
-              </div>
-              
-              <div class="col">
-                <p>Tác giả: <span><b>Nguyễn Mạnh Hùng</b></span></p>
-                <p>Hình thức bìa: <b>Bìa mềm</b></p>
-              </div>
+            <div class="col-4">
+                <img src="./img/book001_thientrongtungphutgiay.jpg" height="430px">
             </div>
 
-            <div class="row text-left">
-                <div class="col-3">
-                  <h1 class="text-danger mt-3"><b>75.000 đ</b></h1>
+            <div class="col-8 text-left">
+                <div class="row p-2">
+                    <h4><b>Thiền Trong Từng Phút Giây</b></h4>
                 </div>
-                <div class="col-2 mt-3">
-                  <del>89.000 đ</del>
-                  <span class="text-light bg-danger p-1" style="border-radius: 4px;">-16%</span>
-                </div>
-                <div class="col-2">
-                </div>
-            </div>
+                <div class="row mt-4">
+                    <div class="col-7">
+                        <p>Nhà cung cấp: <span class="text-primary">Thái Hà</span></p>
+                        <p>Nhà xuất bản: <b>NXB Lao Động</b></p>
+                    </div>
 
-            <div class="row text-left mt-3 pl-3">
-              <div>Thời gian giao hàng: <b>1 - 3 ngày</b> kể từ ngày đặt hàng</div> 
+                    <div class="col">
+                        <p>Tác giả: <span><b>Nguyễn Mạnh Hùng</b></span></p>
+                        <p>Hình thức bìa: <b>Bìa mềm</b></p>
+                    </div>
+                </div>
+
+                <div class="row text-left">
+                    <div class="col-3">
+                        <h1 class="text-danger mt-3"><b>75.000 đ</b></h1>
+                    </div>
+                    <div class="col-2 mt-3">
+                        <del>89.000 đ</del>
+                        <span class="text-light bg-danger p-1" style="border-radius: 4px;">-16%</span>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                </div>
+
+                <div class="row text-left mt-3 pl-3">
+                    <div>Thời gian giao hàng: <b>1 - 3 ngày</b> kể từ ngày đặt hàng</div>
+                </div>
+
+                <div class="row text-left pl-3">
+                    <div>Chính sách đổi trả <b>1 - 1</b> trong: <b>30 ngày</b></div>
+                </div>
+
+                <div class="row text-left pl-3 mt-4">
+                    <span class="mt-2 mr-4">Số lượng:</span>
+                    <div class="border">
+                        <button class="btn">-</button>
+                        <button style="border: none;">1</button>
+                        <button class="btn">+</button>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-4" style="margin-right: -40px;"><button class="border border-danger p-2" style="border-radius: 6px;" id="btnAddToCart"><span class="text-danger"> <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng</span></button></div>
+                    <div class="col-4"><button class="bg-danger pt-2 pb-2 pr-5 pl-5 border border-danger" style="border-radius: 6px;" id="btnBuyNow"><span class="text-light">Mua ngay</span></button></div>
+                </div>
             </div>
-            
-            <div class="row text-left pl-3">
-              <div>Chính sách đổi trả <b>1 - 1</b> trong: <b>30 ngày</b></div>
-            </div>
-            
-            <div class="row text-left pl-3 mt-4">
-              <span class="mt-2 mr-4">Số lượng:</span>
-              <div class="border">
-                <button class="btn">-</button>
-                <button style="border: none;">1</button>
-                <button class="btn">+</button>
-              </div>
-              
-            </div>
-            
-            <div class="row mt-4">
-              <div class="col-4" style="margin-right: -40px;"><button class="border border-danger p-2" style="border-radius: 6px;" id="btnAddToCart"><span class="text-danger"> <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng</span></button></div>
-              <div class="col-4"><button class="bg-danger pt-2 pb-2 pr-5 pl-5 border border-danger" style="border-radius: 6px;" id="btnBuyNow"><span class="text-light">Mua ngay</span></button></div>
-            </div>
-          </div>
         </div>
         <div class="ml-4">
-          <div class="row mt-5 text-left ml-5">
-            <div class="col-12">
-              <h4><b>Thông tin sản phẩm</b></h4>
-              <div class="row">
-                <div class="col-4 text-secondary">Mã hàng</div>
-                <div class="col-4">B09123</div>
-              </div>
-              <div class="row mt-1">
-                <div class="col-4 text-secondary">Tên nhà cung cấp</div>
-                <div class="col-4 text-primary">Thái Hà</div>
-              </div>
-  
-              <div class="row mt-1">
-                <div class="col-4 text-secondary">Tác giả</div>
-                <div class="col-4">Nguyễn Mạnh Hùng</div>
-              </div>
-  
-              <div class="row mt-1">
-                <div class="col-4 text-secondary">NXB</div>
-                <div class="col-4">NXB Lao Động</div>
-              </div>
-  
-              <div class="row mt-1">
-                <div class="col-4 text-secondary">Năm XB</div>
-                <div class="col-4">2020</div>
-              </div>
-  
-              <div class="row mt-1">
-                <div class="col-4 text-secondary">Trọng lượng (gr)</div>
-                <div class="col-4">350</div>
-              </div>
-  
-              <div class="row mt-1">
-                <div class="col-4 text-secondary">Kích thước bao bì (cm)</div>
-                <div class="col-4">20.5 x 13</div>
-              </div>
-  
-              <div class="row mt-1">
-                <div class="col-4 text-secondary">Số trang</div>
-                <div class="col-4">323</div>
-              </div>
-  
-              <div class="row mt-1 mb-5">
-                <div class="col-4 text-secondary">Hình thức</div>
-                <div class="col-4">Bìa Mềm</div>
-              </div>
+            <div class="row mt-5 text-left ml-5">
+                <div class="col-12">
+                    <h4><b>Thông tin sản phẩm</b></h4>
+                    <div class="row">
+                        <div class="col-4 text-secondary">Mã hàng</div>
+                        <div class="col-4">B09123</div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-4 text-secondary">Tên nhà cung cấp</div>
+                        <div class="col-4 text-primary">Thái Hà</div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <div class="col-4 text-secondary">Tác giả</div>
+                        <div class="col-4">Nguyễn Mạnh Hùng</div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <div class="col-4 text-secondary">NXB</div>
+                        <div class="col-4">NXB Lao Động</div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <div class="col-4 text-secondary">Năm XB</div>
+                        <div class="col-4">2020</div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <div class="col-4 text-secondary">Trọng lượng (gr)</div>
+                        <div class="col-4">350</div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <div class="col-4 text-secondary">Kích thước bao bì (cm)</div>
+                        <div class="col-4">20.5 x 13</div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <div class="col-4 text-secondary">Số trang</div>
+                        <div class="col-4">323</div>
+                    </div>
+
+                    <div class="row mt-1 mb-5">
+                        <div class="col-4 text-secondary">Hình thức</div>
+                        <div class="col-4">Bìa Mềm</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-  <div class="footer"></div>
-  </body>
+        <div class="footer"></div>
+</body>
+
 </html>
