@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/home.css">
+
+    <!-- Bố trí layout cho trang sản phẩm -->
+    <link rel="stylesheet" href="../css/grid-product.css">
+    
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    
+    <!-- Lưu thông tin từng sản phẩm -->
+    <script src="../js/list-product.js"></script>
+    <!-- Load dữ liệu vào từng card sản phẩm -->
+    <script src="../js/product-page.js"></script>
+
+    <style>
+        .has-search .form-control {
+            padding-left: 2.375rem;
+        }
+
+        .has-search .form-control-feedback {
+            position: absolute;
+            z-index: 2;
+            display: block;
+            width: 2.375rem;
+            height: 2.375rem;
+            line-height: 2.375rem;
+            text-align: center;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="container pt-2">
+            <div>
+                <div class="row w-100 d-inline-flex justify-content-between">
+                    <ol class="breadcrumb bg-white">
+                        <li class="breadcrumb-item"><a href="../index.html">Trang Chủ</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Sản Phẩm</li>
+                    </ol>
+                    <div class="form-group has-search">
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="search" class="form-control" placeholder="Tìm kiếm">
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Filter for product -->
+                    <div class="col-3">
+                        <div id="filter-product" class="border p-4">
+                            <h5 class="text-uppercase d-flex justify-content-between align-items-center">
+                                <span>Giá</span>
+                                <button type="button" class="btn shadow-none p-0" data-toggle="collapse"
+                                    data-target="#filter-price"><i class="fas fa-plus"></i></button>
+                            </h5>
+                            <div class="collapse" id="filter-price">
+                                <div class="my-md-1">
+                                    <label class="tick">0 - 80.000
+                                        <input type="checkbox" id="filter">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">80.000 - 140.000
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">140.000 - 250.000
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Trên 250.000
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <h5 class="text-uppercase d-flex justify-content-between align-items-center">
+                                <span>Nhà cung cấp</span>
+                                <button type="button" class="btn shadow-none p-0" data-toggle="collapse"
+                                    data-target="#filter-thuonghieu"><i class="fas fa-plus"></i></button>
+                            </h5>
+                            <div class="chkThuongHieu" id="filter-thuonghieu">
+                                <div class="my-md-1">
+                                    <label class="tick">Tất cả
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Malloca
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Electrolux
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Bosch
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Lorca
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Brandt
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Teka
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Cata
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                                <div class="my-md-1">
+                                    <label class="tick">Panasonic
+                                        <input type="checkbox">
+                                        <span class="check"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End filter -->
+
+                    <!-- List product cards -->
+                    <div class="col-9">
+                        <div id="product">
+                            <div class="row border" id="list-product"
+                                style="border-radius: 10px; padding-right: 15px; padding-top: 15px;">
+                                <!-- Product cards -->
+
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#" id=""><i
+                                                class="fa-solid fa-arrow-left"></i></a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">..</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">9</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">10</a></li>
+                                    <li class="page-item"><a class="page-link" href="#" id=""><i
+                                                class="fa-solid fa-arrow-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End list product cards -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
