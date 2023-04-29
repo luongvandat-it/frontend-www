@@ -5,24 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./imgs/shop-icon.jpg">
-    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="icon" href="./imgs/static/shop-icon.jpg">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="./js/jquery-3.6.4.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
     <title>Leaf Book - Trang chủ</title>
-    <style>
-        .navbar-nav {
-            margin-right: 40px;
-        }
-
-        .sticky-navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1030;
-        }
-    </style>
 </head>
 
 <body>
@@ -31,28 +20,29 @@
         <div class="row">
             <div class="col-1">
                 <a href="./index.html">
-                    <img src="./imgs/shop-icon.jpg" width="120px">
+                    <img src="./imgs/static/shop-icon.jpg" width="120px">
                 </a>
             </div>
 
             <div class="col-7 mt-3 pt-4">
-                <form action="/books/findBooksByName(tenSachCanTim=)" class="d-flex align-items-center">
-                    <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." class="form-control me-2 ms-5">
+                <form action="" method="post" class="d-flex align-items-center" id="searchForm">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." class="form-control me-2 ms-5"
+                        id="searchBookTitle">
                     <input type="submit" value="Tìm kiếm" class="btn btn-outline-success">
                 </form>
             </div>
-            <div class="col-1 mt-3 pt-4 ps-5">
+            <div class="col-1 mt-3 pt-4 ps-5" id="showCart">
                 <a href="#">
-                    <img src="./imgs/cart-icon.png" width="40px">
+                    <img src="./imgs/static/cart-icon.png" width="40px">
                 </a>
             </div>
             <div class="col-1 mt-3 pt-4">
                 <a href="#">
-                    <img src="./imgs/loved-book-icon.png" width="40px">
+                    <img src="./imgs/static/loved-book-icon.png" width="40px">
                 </a>
             </div>
-            <div class="col-2 mt-3 pt-4">
-                <button class="btn btn-dark">Đăng nhập</button>
+            <div class="col-2 mt-3 pt-4" id="btnLogin">
+                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng nhập</button>
             </div>
         </div>
     </div>
@@ -62,7 +52,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg d-flex justify-content-center">
                 <ul class="navbar-nav">
-                    <a href="#" class="nav-link text-light"> <b>TRANG CHỦ</b> </a>
+                    <a href="" class="nav-link text-light"> <b>TRANG CHỦ</b> </a>
                 </ul>
                 <ul class="navbar-nav">
                     <a href="#" class="nav-link text-light"> <b>SẢN PHẨM</b> </a>
@@ -71,15 +61,19 @@
                     <a href="#" class="nav-link text-light"> <b>KHUYẾN MÃI</b> </a>
                 </ul>
                 <ul class="navbar-nav">
-                    <a href="#" class="nav-link text-light"> <b>ĐƠN HÀNG CỦA BẠN</b> </a>
+                    <a href="#" class="nav-link text-light" id="showOrders"> <b>ĐƠN HÀNG CỦA BẠN</b> </a>
                 </ul>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav" id="showIntroduction">
                     <a href="#" class="nav-link text-light"> <b>GIỚI THIỆU</b> </a>
                 </ul>
             </nav>
         </div>
     </div>
 
+    <!-- Search Result -->
+    <div class="container" id="searchResult">
+
+    </div>
     <!-- Body -->
     <div class="container" id="content">
 
@@ -114,34 +108,175 @@
         <div class="row pb-3">
             <div class="col"></div>
             <div class="col-2">
-                <a href="#" class="text-light"> <img src="./imgs/sitemap-icon.png" width="30px"> Site map </a>
+                <a href="#" class="text-light"> <img src="./imgs/static/sitemap-icon.png" width="30px"> Site map </a>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#content').load('./html/home.html');
-            var navbar = $(".navbar-container");
 
-            $(window).scroll(function () {
-                if ($(window).scrollTop() > navbar.position().top) {
-                    navbar.addClass("sticky-navbar");
+    <!-- Modal Register -->
+    <div class="modal fade" id="registerModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-light">
+                <div class="row text-center justify-content-center mt-4">
+                    <div class="col">
+                        <h3>Nhập thông tin đăng ký</h3>
+                    </div>
+                </div>
+
+                <div class="modal-body ml-5 mr-5">
+                    <div class="row">
+                        <label for="txtName">Họ tên: </label>
+                        <input type="text" name="txtName" id="txtName" class="form-control" />
+                    </div>
+
+                    <div class="row mt-3">
+                        <label for="txtEmail">Email: </label>
+                        <input type="email" name="txtEmail" id="txtEmail" class="form-control" />
+                    </div>
+
+                    <div class="row mt-3">
+                        <label for="txtPhone">Số điện thoại: </label>
+                        <input type="tel" name="txtPhone" id="txtPhone" class="form-control" />
+                    </div>
+
+                    <div class="row mt-3">
+                        <label for="txtPass">Mật khẩu: </label>
+                        <input type="password" name="txtPass" id="txtPass" class="form-control" />
+                    </div>
+
+                    <div class="row mt-3">
+                        <label for="txtRepass">Nhập lại mật khẩu: </label>
+                        <input type="password" name="txtRepass" id="txtRepass" class="form-control" />
+                        <div><i class="text-danger mt-2" id="errRegister"></i></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer ml-5 mr-5">
+                    <div class="row">
+                        <a href="#" id="haveAccount">Đã có tài khoản đăng nhập</a>
+                    </div>
+
+                    <div class="row">
+                        <button class="btn btn-block btn-success" id="btnSubmitRegister">
+                            Đăng ký
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body ml-5 mr-5">
+                    <div class="row text-center justify-content-center mt-4">
+                        <div class="col">
+                            <h3>Đăng nhập</h3>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <label for="txtEmail">Email: </label>
+                        <input type="email" name="txtEmail" id="txtEmail" class="form-control" />
+                    </div>
+
+                    <div class="row mt-3">
+                        <label for="txtPass">Mật khẩu: </label>
+                        <input type="password" name="txtPass" id="txtPass" class="form-control" />
+                        <div><i class="text-danger mt-2" id="errLogin"></i></div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <a href="#" class="text-danger">Quên mật khẩu?</a>
+                    </div>
+                </div>
+
+                <div class="modal-footer ml-5 mr-5">
+                    <div class="row">
+                        <a href="#" id="notHaveAccount">Đăng ký nếu chưa có tài khoản</a>
+                    </div>
+
+                    <div class="row">
+                        <button class="btn btn-block btn-success">Đăng nhập</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            // Modal
+            $("#btnRegister").click(function () {
+                $("#registerModal").modal();
+            });
+
+            $("#btnLogin").click(function () {
+                $("#loginModal").modal();
+            });
+
+            $("#haveAccount").click(function () {
+                $("#registerModal").modal("hide");
+                $("#loginModal").modal();
+            });
+
+            $("#notHaveAccount").click(function () {
+                $("#loginModal").modal("hide");
+                $("#registerModal").modal();
+            });
+
+            $("#btnSubmitRegister").click(function () {
+                var name = $("#txtName").val();
+                var email = $("#txtEmail").val();
+                var phone = $("#txtPhone").val();
+                var pass = $("#txtPass").val();
+                var repass = $("#txtRepass").val();
+
+                var regexName = /^[a-zA-Z ]{2,30}$/;
+                var regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+                var regexPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+
+                if (regexName.test(name) == false) {
+                    $("#errRegister").text("Họ tên không hợp lệ");
+                    return false;
+                } else if (regexEmail.test(email) == false) {
+                    $("#errRegister").text("Email không hợp lệ");
+                    return false;
+                } else if (regexPhone.test(phone) == false) {
+                    $("#errRegister").text("Số điện thoại không hợp lệ");
+                    return false;
+                } else if (pass.length < 6) {
+                    $("#errRegister").text("Mật khẩu không hợp lệ");
+                    return false;
+                } else if (pass != repass) {
+                    $("#errRegister").text("Mật khẩu không khớp");
+                    return false;
                 } else {
-                    navbar.removeClass("sticky-navbar");
+                    $("#errRegister").text("");
+                    return true;
                 }
             });
 
-            $(function() {
-                $.ajax({
-                    // get data from localhost:8080/api
-                    url: "http://localhost:8080/api/books",
-                    success: function(data) {
-                        var books = data._embedded.books[0].bookTitle;
-                        console.log(books);
-                    }
-                });
-            })
-        });
+            $("#btnSubmitLogin").click(function () {
+                var email = $("#txtEmailLogin").val();
+                var pass = $("#txtPassLogin").val();
+
+                var regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+                if (regexEmail.test(email) == false) {
+                    $("#errLogin").text("Email không hợp lệ");
+                    return false;
+                } else if (pass.length < 6) {
+                    $("#errLogin").text("Mật khẩu không hợp lệ");
+                    return false;
+                } else {
+                    $("#errLogin").text("");
+                    return true;
+                }
+            });
+        })
     </script>
 </body>
 

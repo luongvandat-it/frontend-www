@@ -5,12 +5,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cart Page</title>
-    <link rel="icon" href="../img/logo.avif" />
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css" />
-    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery-3.6.4.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
     <script>
@@ -67,19 +63,6 @@
                 }
             });
 
-            $("#btnCartToPay").click(function() {
-                if (
-                    $("input[name='productInCart1']").is(":checked") ||
-                    $("input[name='productInCart2']").is(":checked") ||
-                    $("input[name='productInCart3']").is(":checked")
-                ) {
-                    $("#errPayment").html("");
-                    window.location.href = "payment.html";
-                } else {
-                    $("#errPayment").html("Vui lòng chọn sản phẩm để thanh toán");
-                }
-            });
-
             $("#btnDecrease").click(function() {
                 var quantity = $("#quantity").val();
                 if (quantity > 1) {
@@ -106,9 +89,32 @@
                 );
             });
 
-            $(function() {
-                $(".header").load("header.html");
-                $(".footer").load("footer.html");
+            $("#quantity").change(function() {
+                var quantity = $("#quantity").val();
+                if (quantity < 1) {
+                    quantity = 1;
+                    $("#quantity").val(quantity);
+                }
+                var priceOfAProduct = $(".priceOfAProduct").html();
+                priceOfAProduct = priceOfAProduct.replace(".", "");
+                var totalPriceOfAProduct = quantity * priceOfAProduct;
+                $(".totalPriceOfAProduct").html(
+                    totalPriceOfAProduct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                );
+            });
+
+            $("#btnPay").click(function() {
+                if (
+                    $("input[name='productInCart1']").is(":checked") ||
+                    $("input[name='productInCart2']").is(":checked") ||
+                    $("input[name='productInCart3']").is(":checked")
+                ) {
+                    // window.location.href = "./html/payment.html";
+                    $('#bodyCart').html("")
+                    $('#payment').load('./html/payment.html')
+                } else {
+                    alert("Vui lòng chọn sản phẩm để thanh toán");
+                }
             });
         })
     </script>
@@ -117,9 +123,8 @@
 <body>
     <div class="header"></div>
 
-    <div class="container">
-
-        <h2 class="mt-5"> <img src="../img/shopping_cart_icon.png" height="50px"> Giỏ hàng (1 sản phẩm)</h2>
+    <div class="container" id="bodyCart">
+        <h2 class="mt-5"> <img src="../imgs/shopping_cart_icon.png" height="50px"> Giỏ hàng (1 sản phẩm)</h2>
 
         <div class="mt-3">
             <table class="table table-bordered">
@@ -138,7 +143,7 @@
                     <tr>
                         <td style="text-align: center; vertical-align: middle;"> <input type="checkbox" name="productInCart1" id="productInCart1" style="zoom: 3;"> </td>
                         <td>
-                            <img src="./img/sach_hanhtrinhvephuongdong.jpg" height="100px" />
+                            <img src="../imgs/sach_hanhtrinhvephuongdong.jpg" height="100px" />
                         </td>
                         <td>Hành trình về phương đông</td>
                         <td class="priceOfAProduct">110.000</td>
@@ -148,7 +153,7 @@
                             <button class="btn btn-primary" id="btnIncrease">+</button>
                         </td>
                         <td class="totalPriceOfAProduct">220.000</td>
-                        <td style="text-align: center; vertical-align: middle;"> <img src="./img/remove.png" height="50px" id="removeProduct"> </td>
+                        <td style="text-align: center; vertical-align: middle;"> <img src="../imgs/remove.png" height="50px" id="removeProduct"> </td>
                     </tr>
 
                     <tr>
@@ -161,12 +166,14 @@
         </form>
         <div class="text-danger" id="errPayment"></div>
         <div class="row">
-            <button class="btn btn-block btn-success mb-5 mr-3 ml-3" id="btnCartToPay">
+            <button class="btn btn-block btn-success mb-5 mr-3 ml-3" id="btnPay">
           Thanh toán
         </button>
         </div>
     </div>
 </body>
 <div class="footer"></div>
+<div id="payment">
 
+</div>
 </html>
