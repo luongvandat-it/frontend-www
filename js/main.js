@@ -50,12 +50,11 @@ $(document).ready(function () {
         $('#searchResult').html('');
         $('#content').load('./html/cart.html');
     });
-
     $('#btnCartToPay').click(function () {
         $('#content').load('../html/payment.html');
     });
 
-    // Header - Login/Register
+    // Header - Login
     $("#btnLogin").click(function () {
         $("#loginModal").modal();
     });
@@ -68,13 +67,13 @@ $(document).ready(function () {
             $("#errLogin").text("Invalid Email");
             return false;
         } else if (pass.length < 8) {
-            $("#errLogin").text("InvaLid Password");
+            $("#errLogin").text("Invalid Password");
             return false;
         } else {
             $.ajax({
                 url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + email,
                 error: function () {
-                    $("#errLogin").text("Email not found");
+                    $("#errLogin").text("Email Not Found");
                 },
                 success: function (data) {
                     if (data.userPassword == pass) {
@@ -89,78 +88,86 @@ $(document).ready(function () {
             });
         }
     });
-    // // click enter to login and close modal
-    // $("#txtPassLogin").keypress(function (e) {
-    //     if (e.which == 13) {
-    //         $("#btnSubmitLogin").click();
-    //         $("#loginModal").modal("hide");
-    //     }
+
+    // Header - Switch Login to Register
+    $("#notHaveAccount").click(function () {
+        $("#btnSubmitLoginClose").click();
+        $("#loginModal").modal("hide");
+        $("#registerModal").modal();
+    });
+
+    // Header - Register
+    $("#btnSubmitRegister").click(function () {
+        var name = $("#txtName").val().trim();
+        var fullname = name.split(" ");
+        var email = $("#txtEmail").val();
+        var phone = $("#txtPhone").val();
+        var pass = $("#txtPass").val().trim();
+        var repass = $("#txtRepass").val();
+
+        var regexName = /^[a-zA-Z ]{2,30}$/;
+        var regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+        var regexPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+
+        // if (regexName.test(name) == false) {
+        //     $("#errRegister").text("Invalid Name!");
+        // } else if (regexEmail.test(email) == false) {
+        //     $("#errRegister").text("Invalid Email!");
+        // } else if (regexPhone.test(phone) == false) {
+        //     $("#errRegister").text("Invalid Phone Number!");
+        // } else if (pass.length < 6) {
+        //     $("#errRegister").text("Invalid Password!");
+        // } else if (pass != repass) {
+        //     $("#errRegister").text("Retype password not match!");
+        // } else {
+        //     $("#errRegister").text("");
+        $.ajax({
+            url: "http://localhost:8080/api/user_s/add",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                "userEmail": "a@gmail.com",
+                "userPassword": "123456",
+                // "role": {
+                //     "roleId": "R001",
+                //     "roleName": "Admin"
+                // }
+            }),
+            success: function (data) {
+                console.log(data + "success");
+                alert("Register Success!");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log(xhr.responseText);
+                alert("Register Error!");
+            }
+        });
+
+        //     $("#btnSubmitSignUpClose").click();
+        //     $("#registerModal").modal("hide");
+        // }
+    });
+
+
+
+    // $('#showIntroduction').click(function () {
+    //     $('#content').load('../html/introduction.html');
     // });
 
-
-    // $("#haveAccount").click(function () {
-    //     $("#registerModal").modal("hide");
-    //     $("#loginModal").modal();
+    // $('#showOrders').click(function () {
+    //     $('#content').load('../html/orders.html');
     // });
 
-    // $("#notHaveAccount").click(function () {
-    //     $("#loginModal").modal("hide");
-    //     $("#registerModal").modal();
-    // });
-
-    // $("#btnSubmitRegister").click(function () {
-    //     var name = $("#txtName").val();
-    //     var email = $("#txtEmail").val();
-    //     var phone = $("#txtPhone").val();
-    //     var pass = $("#txtPass").val();
-    //     var repass = $("#txtRepass").val();
-
-    //     var regexName = /^[a-zA-Z ]{2,30}$/;
-    //     var regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-    //     var regexPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
-
-    //     if (regexName.test(name) == false) {
-    //         $("#errRegister").text("Họ tên không hợp lệ");
-    //         return false;
-    //     } else if (regexEmail.test(email) == false) {
-    //         $("#errRegister").text("Email không hợp lệ");
-    //         return false;
-    //     } else if (regexPhone.test(phone) == false) {
-    //         $("#errRegister").text("Số điện thoại không hợp lệ");
-    //         return false;
-    //     } else if (pass.length < 6) {
-    //         $("#errRegister").text("Mật khẩu không hợp lệ");
-    //         return false;
-    //     } else if (pass != repass) {
-    //         $("#errRegister").text("Mật khẩu không khớp");
-    //         return false;
+    // $("#btnPay").click(function () {
+    //     if (
+    //         $("input[name='productInCart1']").is(":checked") ||
+    //         $("input[name='productInCart2']").is(":checked") ||
+    //         $("input[name='productInCart3']").is(":checked")
+    //     ) {
+    //         window.location.href = "./html/payment.html";
     //     } else {
-    //         $("#errRegister").text("");
-    //         return true;
+    //         alert("Vui lòng chọn sản phẩm để thanh toán");
     //     }
     // });
-
-
-
-    $('#showIntroduction').click(function () {
-        $('#content').load('../html/introduction.html');
-    });
-
-    $('#showOrders').click(function () {
-        $('#content').load('../html/orders.html');
-    });
-
-    $("#btnPay").click(function () {
-        if (
-            $("input[name='productInCart1']").is(":checked") ||
-            $("input[name='productInCart2']").is(":checked") ||
-            $("input[name='productInCart3']").is(":checked")
-        ) {
-            window.location.href = "./html/payment.html";
-        } else {
-            alert("Vui lòng chọn sản phẩm để thanh toán");
-        }
-    });
-
-
 });
