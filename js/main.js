@@ -13,33 +13,39 @@ $(document).ready(function () {
     // Header - Search
     $('#searchForm').submit(function (e) {
         e.preventDefault();
+        $('#content').load('./html/home.html');
         $('#searchResult').html("");
         $.ajax({
             url: "http://localhost:8080/api/books/search/findBooksByBookTitleContainsIgnoreCase?bookTitle=" + $('#searchBookTitle').val(),
             success: function (data) {
                 var books = data._embedded.books;
                 var content = "";
-                if (books.length == 0) {
-                    content += "<div class='col-12 mt-4'>";
-                    content += "<h3 class='text-center'>No books found!</h3>";
-                    content += "</div>";
-                } else {
-                    content += "<div class='col-12 mt-5'>";
-                    content += "<h5 class='text-center'>Search results for: <b> <span class='text-success'>" + $('#searchBookTitle').val() + "</span></b></h5>";
-                    content += "</div>";
-                    for (var i = 0; i < books.length; i++) {
-                        content += "<div class='col-3 mt-5'>";
-                        content += "<div class='card'>";
-                        content += "<img src='./imgs/static/img-book-1.jpg' class='card-img-top'>";
-                        content += "<div class='card-body'>";
-                        content += "<h6 class='card-title'>" + books[i].bookTitle + "</h6>";
-                        content += "<p class='card-text text-success'>" + books[i].bookPrice + "$</p>";
-                        content += "<a class='btn btn-primary mt-0' name=" + books[i].bookTitle + ">ADD TO CART</a>";
-                        content += "</div>";
-                        content += "</div>";
-                        content += "</div>";
-                    }
+                content += '<div class="col-12 mt-2">';
+                content += '<h5 class="text-center mt-3">Result search for: <b class="text-success">' + $('#searchBookTitle').val() + '</b></h5>';
+                content += '</div>';
+                for (var i = 0; i < books.length; i++) {
+                    content += '<div class="col-4 mt-2">';
+                    content += '<a href="#" class="bookCart">';
+                    content += '<div class="card">';
+                    content += '<div class="card-body">';
+                    content += '<div class="card-img-actions">';
+                    content += '<img src="' + books[i].bookImage + '" class="card-img img-fluid book-img" id="bookImage">';
+                    content += '</div>';
+                    content += '<div class="mb-2">';
+                    content += '<h6 class="font-weight-semibold m-3">';
+                    content += '<a href="#" class="text-default" id="bookName">' + books[i].bookTitle + '</a>';
+                    content += '</h6>';
+                    content += '</div>';
+                    content += '<h5 id="bookPrice">' + books[i].bookPrice + ' $</h5>';
+                    content += '<button type="button" class="btn btn-primary text-light btnAddToCard"> Add to cart</button>';
+                    content += '</div>';
+                    content += '</div>';
+                    content += '</a>';
+                    content += '</div>';
                 }
+                content += '<div class="col-12 mt-2">';
+                content += '<h5 class="text-center text-success m-5">--- End Search Result ---</h5>';
+                content += '</div>';
                 $('#searchResult').append(content);
             }
         });
@@ -87,6 +93,19 @@ $(document).ready(function () {
                 }
             });
         }
+
+        // show name user login
+        var name = $("#txtEmailLogin").val();
+        var fullname = name.split("@");
+        $("#nameUserLogin").text(fullname[0]);
+
+
+        // append name login and button logout
+        $("#btnLogout").show();
+        $("#btnLogout").click(function () {
+            $("#btnLogin").show();
+            $("#btnLogout").hide();
+        });
     });
 
     // Header - Switch Login to Register
@@ -149,25 +168,60 @@ $(document).ready(function () {
         // }
     });
 
+    // Navbar - Sales
+    $('#showSales').click(function () {
+        $('#content').load('./html/home.html');
+        $('html, body').animate({
+            scrollTop: $("#contentSales").offset().top - 100
+        }, 1);
+    });
 
+    // Navbar - Orders
+    $('#showOrders').click(function () {
+        $('#content').load('../html/orders.html');
+    });
 
-    // $('#showIntroduction').click(function () {
-    //     $('#content').load('../html/introduction.html');
-    // });
+    // Navbar - About
+    $('#showIntroduction').click(function () {
+        $('#content').load('../html/introduction.html');
+    });
 
-    // $('#showOrders').click(function () {
-    //     $('#content').load('../html/orders.html');
-    // });
+    // Details of book
+    $('#showDetails').click(function () {
+        $('#content').load('../html/details.html');
+    });
 
-    // $("#btnPay").click(function () {
-    //     if (
-    //         $("input[name='productInCart1']").is(":checked") ||
-    //         $("input[name='productInCart2']").is(":checked") ||
-    //         $("input[name='productInCart3']").is(":checked")
-    //     ) {
-    //         window.location.href = "./html/payment.html";
-    //     } else {
-    //         alert("Vui lòng chọn sản phẩm để thanh toán");
-    //     }
-    // });
+    // click any add to cart button will get image name and price, number of book default is 1, then add to #booksInCart in cart.html
+    $(document).on('click', '.btnAddToCard', function () {
+        var bookName = $(this).parent().parent().parent().find('#bookName').text();
+        var bookPrice = $(this).parent().parent().parent().find('#bookPrice').text();
+        var bookImage = $(this).parent().parent().parent().find('#bookImage').attr('src');
+        var bookNumber = 1;
+        // save to local storage to list added to cart
+        var book = {
+            bookName: bookName,
+            bookPrice: bookPrice,
+            bookImage: bookImage,
+            bookNumber: bookNumber
+        };
+        var listBook = [];
+        listBook.push(book);
+        // add to local storage if not exist or update if exist
+        if (localStorage.getItem('listBook') == null) {
+            localStorage.setItem('listBook', JSON.stringify(listBook));
+        } else {
+            var listBook = JSON.parse(localStorage.getItem('listBook'));
+            var flag = false;
+            for (var i = 0; i < listBook.length; i++) {
+                if (listBook[i].bookName == bookName) {
+                    listBook[i].bookNumber += 1;
+                    flag = true;
+                }
+            }
+            if (flag == false) {
+                listBook.push(book);
+            }
+            localStorage.setItem('listBook', JSON.stringify(listBook));
+        }
+    });
 });

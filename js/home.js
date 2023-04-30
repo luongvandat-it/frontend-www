@@ -19,7 +19,7 @@ $(document).ready(function () {
                 content += '</h6>';
                 content += '</div>';
                 content += '<h5 id="bookPrice">' + books[i].bookPrice + ' $</h5>';
-                content += '<button type="button" class="btn btn-outline-success text-dark"> Add to cart</button>';
+                content += '<button type="button" class="btn btn-outline-success text-dark btnAddToCard"> Add to cart</button>';
                 content += '</div>';
                 content += '</div>';
                 content += '</a>';

@@ -5,68 +5,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detail Product Page</title>
-    <link rel="icon" href="../img/logo.avif" />
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css" />
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $(".btn").click(function() {
-                var value = $(this).parent().find("button:eq(1)").text();
-                if ($(this).text() == "+") {
-                    value++;
-                } else {
-                    if (value > 0) {
-                        value--;
-                    }
-                }
-                $(this).parent().find("button:eq(1)").text(value);
-            });
-
-            $(".btn").click(function() {
-                var value = $(this).parent().find("button:eq(1)").text();
-                if (value > 10) {
-                    value = 10;
-                } else if (value < 1) {
-                    value = 1;
-                }
-                $(this).parent().find("button:eq(1)").text(value);
-            });
-
-            $(function() {
-                $(".header").load("header.html");
-                $(".footer").load("footer.html");
-            });
-        });
-    </script>
 </head>
 
 <body>
-    <div class="header"></div>
-
-    <div class="container justify-content-center text-center">
-        <div class="row mt-5">
+    <div class="container">
+        <div class="row m-2">
             <div class="col-4">
-                <img src="./img/book001_thientrongtungphutgiay.jpg" height="430px">
+                <img src="../imgs/static/b001.jpg" height="430px" id="bookImageDetail">
             </div>
 
             <div class="col-8 text-left">
-                <div class="row p-2">
-                    <h4><b>Thiền Trong Từng Phút Giây</b></h4>
+                <div class="row">
+                    <h4><b id="bookNameDetail">Thiền Trong Từng Phút Giây</b></h4>
                 </div>
                 <div class="row mt-4">
                     <div class="col-7">
-                        <p>Nhà cung cấp: <span class="text-primary">Thái Hà</span></p>
-                        <p>Nhà xuất bản: <b>NXB Lao Động</b></p>
+                        <p>Provider: <span class="text-primary" id="bookProviderDetail">Thái Hà</span></p>
+                        <p>Publisher: <b id="bookPublisherDetail">NXB Lao Động</b></p>
                     </div>
 
                     <div class="col">
-                        <p>Tác giả: <span><b>Nguyễn Mạnh Hùng</b></span></p>
-                        <p>Hình thức bìa: <b>Bìa mềm</b></p>
+                        <p>Authors: <span><b id="bookAuthorNameDetail">Nguyễn Mạnh Hùng</b></span></p>
+                        <p>Slug: <b id="bookSlugDetail">Bìa mềm</b></p>
                     </div>
                 </div>
 
@@ -101,8 +61,12 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-4" style="margin-right: -40px;"><button class="border border-danger p-2" style="border-radius: 6px;" id="btnAddToCart"><span class="text-danger"> <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng</span></button></div>
-                    <div class="col-4"><button class="bg-danger pt-2 pb-2 pr-5 pl-5 border border-danger" style="border-radius: 6px;" id="btnBuyNow"><span class="text-light">Mua ngay</span></button></div>
+                    <div class="col-4" style="margin-right: -40px;"><button class="border border-danger p-2"
+                            style="border-radius: 6px;" id="btnAddToCart"><span class="text-danger"> <i
+                                    class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng</span></button></div>
+                    <div class="col-4"><button class="bg-danger pt-2 pb-2 pr-5 pl-5 border border-danger"
+                            style="border-radius: 6px;" id="btnBuyNow"><span class="text-light">Mua ngay</span></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,8 +120,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="footer"></div>
+    </div>
 </body>
 
 </html>

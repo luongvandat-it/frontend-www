@@ -33,7 +33,7 @@
             </div>
             <div class="col-2 mt-3 pt-4 ps-5" id="showCart">
                 <a href="#">
-                    <img src="./imgs/static/cart-icon.png" width="40px"> <span>Giỏ hàng</span>
+                    <img src="./imgs/static/cart-icon.png" width="40px"> <span>Cart</span>
                 </a>
             </div>
             <div class="col-1 mt-3 pt-4" id="showLoved" hidden>
@@ -44,6 +44,9 @@
             <div class="col-2 mt-3 pt-4" id="btnLogin">
                 <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
             </div>
+            <div class="col-2 mt-3 pt-4" id="btnLogout" hidden>
+                <button class="btn btn-dark">Logout</button>
+            </div>
         </div>
     </div>
 
@@ -52,23 +55,26 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg d-flex justify-content-center">
                 <ul class="navbar-nav">
-                    <a href="" class="nav-link text-light"> <b>HOME</b> </a>
+                    <a href="" class="nav-link text-light" id="showHome"> <b>HOME</b> </a>
                 </ul>
                 <ul class="navbar-nav">
                     <a href="#" class="nav-link text-light"> <b>PRODUCTS</b> </a>
                 </ul>
                 <ul class="navbar-nav">
-                    <a href="#" class="nav-link text-light"> <b>SALE</b> </a>
+                    <a class="nav-link text-light" id="showSales" style="cursor: pointer;"> <b>SALES</b> </a>
                 </ul>
                 <ul class="navbar-nav">
                     <a href="#" class="nav-link text-light" id="showOrders"> <b>YOUR ORDERS</b> </a>
                 </ul>
                 <ul class="navbar-nav" id="showIntroduction">
-                    <a href="#" class="nav-link text-light"> <b>INTRODUCTION</b> </a>
+                    <a href="#" class="nav-link text-light"> <b>ABOUT</b> </a>
                 </ul>
             </nav>
         </div>
     </div>
+
+    <!-- // develop only -->
+    <button id="showDetails" hidden>show details page</button>
 
     <!-- Search Result -->
     <div class="container text-center justify-content-center">
