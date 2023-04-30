@@ -31,12 +31,12 @@
                     <input type="submit" value="Search" class="btn btn-outline-success">
                 </form>
             </div>
-            <div class="col-1 mt-3 pt-4 ps-5" id="showCart">
+            <div class="col-2 mt-3 pt-4 ps-5" id="showCart">
                 <a href="#">
-                    <img src="./imgs/static/cart-icon.png" width="40px">
+                    <img src="./imgs/static/cart-icon.png" width="40px"> <span>Giỏ hàng</span>
                 </a>
             </div>
-            <div class="col-1 mt-3 pt-4" id="showLoved">
+            <div class="col-1 mt-3 pt-4" id="showLoved" hidden>
                 <a href="#">
                     <img src="./imgs/static/loved-book-icon.png" width="40px">
                 </a>
@@ -84,87 +84,23 @@
 
     <!-- Footer -->
     <div class="container-fluid text-light justify-content-center text-center" style="background-color: #26af61;">
-        <div class="row pt-4">
-            <h3><b>Về chúng tôi</b></h3>
+        <div class="row pt-5">
+            <h2><b>About us</b></h2>
         </div>
-
         <div class="row mt-3">
-            <div class="col">
+            <div class="col-3">
                 <p><b>Email: </b> luongvandat.it@gmail.com</p>
             </div>
-
             <div class="col">
-                <p><b>Địa chỉ: </b> 12 Nguyễn Văn Bảo, Phường 4, Gò Vấp, TPHCM</p>
+                <p><b>Address: </b> 12 Nguyen Van Bao, Ward 4, Go Vap District, Ho Chi Minh City</p>
             </div>
-
-            <div class="col">
-                <p><b>Số điện thoại:</b> 0981 993 215</p>
+            <div class="col-3">
+                <p><b>Phone Number:</b> 0981 993 215</p>
             </div>
         </div>
-
-        <div class="row mt-2">
+        <div class="row mt-2 pb-5">
             <div class="col">
-                <p><b>Các thành viên tham gia: </b>Lường Văn Đạt, Trần Khánh Linh, Nguyễn Minh Quân</p>
-            </div>
-        </div>
-
-        <div class="row pb-3">
-            <div class="col"></div>
-            <div class="col-2">
-                <a href="#" class="text-light"> <img src="./imgs/static/sitemap-icon.png" width="30px"> Site map </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Register -->
-    <div class="modal fade" id="registerModal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content bg-light">
-                <div class="row text-center justify-content-center mt-4">
-                    <div class="col">
-                        <h3>Nhập thông tin đăng ký</h3>
-                    </div>
-                </div>
-
-                <div class="modal-body ml-5 mr-5">
-                    <div class="row">
-                        <label for="txtName">Họ tên: </label>
-                        <input type="text" name="txtName" id="txtName" class="form-control" />
-                    </div>
-
-                    <div class="row mt-3">
-                        <label for="txtEmail">Email: </label>
-                        <input type="email" name="txtEmail" id="txtEmail" class="form-control" />
-                    </div>
-
-                    <div class="row mt-3">
-                        <label for="txtPhone">Số điện thoại: </label>
-                        <input type="tel" name="txtPhone" id="txtPhone" class="form-control" />
-                    </div>
-
-                    <div class="row mt-3">
-                        <label for="txtPass">Mật khẩu: </label>
-                        <input type="password" name="txtPass" id="txtPass" class="form-control" />
-                    </div>
-
-                    <div class="row mt-3">
-                        <label for="txtRepass">Nhập lại mật khẩu: </label>
-                        <input type="password" name="txtRepass" id="txtRepass" class="form-control" />
-                        <div><i class="text-danger mt-2" id="errRegister"></i></div>
-                    </div>
-                </div>
-
-                <div class="modal-footer ml-5 mr-5">
-                    <div class="row">
-                        <a href="#" id="haveAccount">Đã có tài khoản đăng nhập</a>
-                    </div>
-
-                    <div class="row">
-                        <button class="btn btn-block btn-success" id="btnSubmitRegister">
-                            Đăng ký
-                        </button>
-                    </div>
-                </div>
+                <p><b>Members: </b>Luong Van Dat, Tran Khanh Linh, Nguyen Minh Quan</p>
             </div>
         </div>
     </div>
@@ -193,12 +129,60 @@
 
                 <div class="modal-footer text-center justify-content-center">
                     <button type="submit" class="btn btn-block btn-success" id="btnSubmitLogin">Login</button>
-                    <button type="button" class="btn btn-block btn-danger" data-bs-dismiss="modal" id="btnSubmitLoginClose" hidden>Close</button>
+                    <button type="button" class="btn btn-block btn-danger" data-bs-dismiss="modal"
+                        id="btnSubmitLoginClose" hidden>Close</button>
                 </div>
                 <div class="row text-center">
                     <a href="#" class="mb-4 mt-2" id="notHaveAccount" data-bs-toggle="modal"
                         data-bs-target="#registerModal">Sign
-                        up if you don't have an account!</a>
+                        up if you don't have an account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Register -->
+    <div class="modal fade" id="registerModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-light">
+                <div class="row text-center justify-content-center mt-5">
+                    <div class="col">
+                        <h3 class="text-success"><b>ENTER REGISTRATION INFORMATION</b></h3>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row m-3">
+                        <label for="txtName">Full Name: </label>
+                        <input type="text" name="txtName" id="txtName" class="form-control" />
+                    </div>
+
+                    <div class="row m-3">
+                        <label for="txtEmail">Email: </label>
+                        <input type="email" name="txtEmail" id="txtEmail" class="form-control" />
+                    </div>
+
+                    <div class="row m-3">
+                        <label for="txtPhone">Number Phone: </label>
+                        <input type="tel" name="txtPhone" id="txtPhone" class="form-control" />
+                    </div>
+
+                    <div class="row m-3">
+                        <label for="txtPass">Password: </label>
+                        <input type="password" name="txtPass" id="txtPass" class="form-control" />
+                    </div>
+
+                    <div class="row m-3">
+                        <label for="txtRepass">Retype password: </label>
+                        <input type="password" name="txtRepass" id="txtRepass" class="form-control" />
+                        <div><i class="text-danger mt-2" id="errRegister"></i></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer text-center justify-content-center">
+                    <button type="submit" class="btn btn-block btn-success" id="btnSubmitRegister">SIGN UP</button>
+                    <button type="button" class="btn btn-block btn-danger" data-bs-dismiss="modal"
+                        id="btnSubmitSignUpClose" hidden>Close</button>
                 </div>
             </div>
         </div>
