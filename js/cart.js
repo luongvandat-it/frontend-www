@@ -1,5 +1,4 @@
-$(document).ready(function () {
-    // Cart - load cart
+function loadCartPage() {
     var listBook = JSON.parse(localStorage.getItem("listBook"));
     var content = "";
     var totalPrice = 0;
@@ -9,9 +8,9 @@ $(document).ready(function () {
         content += "<td><img src='" + listBook[i].bookImage + "' width='100px' height='100px'></td>";
         content += "<td>" + listBook[i].bookName + "</td>";
         content += "<td>" + listBook[i].bookPrice + "</td>";
-        content += "<td><button class='btn btn-primary' onclick='minusBook(\"" + listBook[i].bookName + "\")'>-</button>";
-        content += "<input type='text' name='bookNumber' class='p-1' value='" + listBook[i].bookNumber + "' style='width: 50px; text-align: center;' readonly>";
-        content += "<button class='btn btn-primary' onclick='plusBook(\"" + listBook[i].bookName + "\")'>+</button></td>";
+        content += "<td><button hidden class='btn btn-primary' onclick='minusBook(\"" + listBook[i].bookName + "\")'>-</button>";
+        content += "<input type='text' name='bookNumber' class='p-1' value='" + listBook[i].bookNumber + "' style='width: 50px; text-align: center; border:none' readonly>";
+        content += "<button hidden class='btn btn-primary' onclick='plusBook(\"" + listBook[i].bookName + "\")'>+</button></td>";
         var price = listBook[i].bookPrice.replace(" $", "");
         var totalPriceOfOne = parseFloat(price.trim()).toFixed(2) * listBook[i].bookNumber;
         content += "<td>" + totalPriceOfOne + " $</td>";
@@ -22,6 +21,11 @@ $(document).ready(function () {
     content += "<td colspan='3'><b class='text-danger h3'>" + totalPrice + " $</b></td>";
     content += "</tr>";
     $("tbody").append(content);
+}
+
+$(document).ready(function () {
+    // Cart - load cart
+    loadCartPage();
 
     // Cart - Select all
     $("#checkAllCart").click(function () {
@@ -67,14 +71,53 @@ $(document).ready(function () {
                     }
                 }
                 localStorage.setItem("listBook", JSON.stringify(listBook));
-                location.reload();
+                $("tbody").empty();
+                loadCartPage();
             }
         }
     });
 
-    // Minus book
-    $(".btnMinusBook").click(function () {
-        var bookName = $(this).parent().parent().find("td:eq(2)").text();
-        minusBook(bookName);
+    // Checkout
+    $("#btnCheckout").click(function () {
+        var listBook = JSON.parse(localStorage.getItem("listBook"));
+        var listBookSelected = [];
+        $("input[name='select']:checked").each(function () {
+            listBookSelected.push($(this).val());
+        });
+        if (listBookSelected.length == 0) {
+            alert("Please select book(s) to checkout!");
+        } else {
+            var confirmCheckout = confirm("Are you sure to checkout selected book(s)?");
+            if (confirmCheckout) {
+                var listBookCheckout = [];
+                for (var i = 0; i < listBookSelected.length; i++) {
+                    for (var j = 0; j < listBook.length; j++) {
+                        if (listBookSelected[i] == listBook[j].bookName) {
+                            listBookCheckout.push(listBook[j]);
+                        }
+                    }
+                }
+                localStorage.setItem("listBookCheckout", JSON.stringify(listBookCheckout));
+
+                var listBookNumber = [];
+                $("tbody tr").each(function () {
+                    var bookNumber = $(this).find("input[name='bookNumber']").val();
+                    listBookNumber.push(bookNumber);
+                });
+                localStorage.setItem("listBookNumber", JSON.stringify(listBookNumber));
+
+                var listBookTotalPrice = [];
+                $("tbody tr").each(function () {
+                    var bookTotalPrice = $(this).find("td:eq(5)").text().replace(" $", "");
+                    listBookTotalPrice.push(bookTotalPrice);
+                });
+                localStorage.setItem("listBookTotalPrice", JSON.stringify(listBookTotalPrice));
+
+                var totalPrice = $("tbody tr:last td:last").text().replace(" $", "");
+                localStorage.setItem("totalPrice", totalPrice);
+            }
+            $("#bodyCart").empty();
+            $("#bodyCart").load("../html/payment.html");
+        }
     });
 });

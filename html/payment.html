@@ -1,231 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css"
-    />
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
 
-    <script>
-      $(document).ready(function () {
-        $("#btnConfirmPay").click(function () {
-          var name = $("#name").val();
-          var email = $("#email").val();
-          var phone = $("#phone").val();
-          var address = $("#address").val();
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../js/payment.js"></script>
+</head>
 
-          var regexName = /^[a-zA-Z ]{2,30}$/;
-          var regexEmail =
-            /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-          var regexPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
-          var regexAddress = /^[a-zA-Z0-9 ]{2,30}$/;
-
-          if (regexName.test(name) == false) {
-            $("#errPayment").text("Họ tên không hợp lệ");
-            return false;
-          } else if (regexEmail.test(email) == false) {
-            $("#errPayment").text("Email không hợp lệ");
-            return false;
-          } else if (regexPhone.test(phone) == false) {
-            $("#errPayment").text("Số điện thoại không hợp lệ");
-            return false;
-          } else if (regexAddress.test(address) == false) {
-            $("#errPayment").text("Địa chỉ không hợp lệ");
-            return false;
-          } else {
-            $("#errPayment").text("");
-            return true;
-          }
-        });
-      });
-
-      $(document).ready(function () {
-        $("#clickMomo").click(function () {
-          $("#momo").prop("checked", true);
-          $("#cast").prop("checked", false);
-        });
-        $("#clickCast").click(function () {
-          $("#cast").prop("checked", true);
-          $("#momo").prop("checked", false);
-        });
-
-        $(function () {
-          $(".header").load("header.html");
-          $(".footer").load("footer.html");
-        });
-      });
-    </script>
-  </head>
-
-  <body>
-    <div class="header"></div>
-
-    <div class="container">
-      <h2 class="text-center mt-5">XÁC NHẬN THANH TOÁN</h2>
-
-      <form action="" method="post">
-        <div class="form-group">
-          <label for="name">Họ và tên:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            placeholder="Nhập họ và tên"
-            name="name"
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            placeholder="Nhập email"
-            name="email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="phone">Số điện thoại:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="phone"
-            placeholder="Nhập số điện thoại"
-            name="phone"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="address">Địa chỉ giao hàng:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="address"
-            placeholder="Nhập địa chỉ"
-            name="address"
-          />
-        </div>
-
-        <div class="border p-4">
-          <div class="form-group">
-            <label for="payment">Phương thức thanh toán:</label><br />
-            <input type="radio" name="paymentMethod" id="momo" />
-            <a href="#" id="clickMomo">
-              <img src="./imgs/momo.png" height="50px" /> Ví Momo</a
-            >
-            <br />
-            <input type="radio" name="paymentMethod" id="cast" checked />
-            <a href="#" id="clickCast">
-              <img src="./imgs/cast.jpg" height="50px" /> Tiền mặt
-            </a>
-          </div>
-        </div>
-
-        <div class="form-group mt-4">
-          <label for="note">Ghi chú giao hàng:</label>
-          <textarea
-            class="form-control"
-            rows="5"
-            id="note"
-            name="note"
-          ></textarea>
-        </div>
-
-        <div class="form-group mt-4">
-          <label for="voucher">Mã giảm giá:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="voucher"
-            placeholder="Nhập mã giảm giá"
-            name="voucher"
-          />
-        </div>
-
-        <div class="mt-2">
-          <p>Các sản phẩm đã chọn mua</p>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Ảnh sản phẩm</th>
-                <th>Tên sản phẩm</th>
-                <th>Giá</th>
-                <th>Số lượng</th>
-                <th>Thành tiền (VNĐ)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>
-                  <img
-                    src="./imgs/sach_hanhtrinhvephuongdong.jpg"
-                    height="100px"
-                  />
-                </td>
-                <td>Hành trình về phương đông</td>
-                <td>110.000</td>
-                <td>2</td>
-                <td>220.000</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>
-                  <img src="./imgs/sach_gieotronghanhphuc.jpg" height="100px" />
-                </td>
-                <td>Gieo trồng hạnh phúc</td>
-                <td>100.000</td>
-                <td>1</td>
-                <td>100.000</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>
-                  <img src="./imgs/sach_hieuvetraitim.jpg" height="100px" />
-                </td>
-                <td>Hiểu về trái tim</td>
-                <td>150.000</td>
-                <td>1</td>
-                <td>150.000</td>
-              </tr>
-              <tr>
-                <td colspan="5">Tổng tiền (Đã bao gồm VAT)</td>
-                <td>493.500</td>
-              </tr>
-              <tr>
-                <td colspan="5">Phí vận chuyển</td>
-                <td>11.000</td>
-              </tr>
-              <tr>
-                <td colspan="5">Giảm giá</td>
-                <td>0</td>
-              </tr>
-              <tr class="bg-danger text-light">
-                <td colspan="5"><b>Tổng thanh toán</b></td>
-                <td><b>504.500 VNĐ</b></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </form>
-      <div class="text-danger" id="errPayment"></div>
-      <div class="row">
-        <button
-          class="btn btn-block btn-success mb-5 mr-3 ml-3"
-          id="btnConfirmPay"
-        >
-          Xác nhận thanh toán
-        </button>
+<body>
+  <div class="container">
+    <h2 class="text-center text-primary mt-4"><b>CONFIRM PAYMENT</b></h2>
+    <form action="" method="post">
+      <div class="form-group mt-2">
+        <label for="name">Full Name:</label>
+        <input type="text" class="form-control" id="txtName" name="name" readonly />
       </div>
-    </div>
+      <div class="form-group mt-2">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="txtEmail" name="email" readonly />
+      </div>
+      <div class="form-group mt-2">
+        <label for="phone">Phone Number:</label>
+        <input type="text" class="form-control" id="txtPhone" name="phone" readonly />
+      </div>
+      <div class="form-group mt-2">
+        <label for="address">Address:</label>
+        <input type="text" class="form-control" id="address" placeholder="Enter address ..." name="address" />
+      </div>
+      <div class="border p-4 mt-4">
+        <div class="form-group">
+          <label for="payment">Payment method:</label><br />
+          <input type="radio" name="paymentMethod" id="momo" />
+          <a id="clickMomo">
+            <img src="./imgs/static/momo.png" height="50px" /> Momo Wallet </a>
+          <br />
+          <input type="radio" name="paymentMethod" id="cast" checked />
+          <a id="clickCast">
+            <img src="./imgs/static/cast.jpg" height="50px" /> Cast
+          </a>
+        </div>
+      </div>
+      <div class="form-group mt-4">
+        <label for="note">Note:</label>
+        <textarea class="form-control" rows="5" id="note" name="note"
+          placeholder="Message for Leaf Book here ..."></textarea>
+      </div>
 
-    <div class="footer"></div>
-  </body>
+      <div class="form-group mt-4">
+        <label for="voucher">Voucher:</label>
+        <input type="text" class="form-control" id="voucher" placeholder="Enter discount" name="voucher" />
+      </div>
+
+      <div class="mt-4">
+        <p>Selected book(s) to buy: </p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </form>
+    <div class="text-danger" id="errPayment"></div>
+    <div class="row">
+      <button class="btn-block btn-success mb-5 mr-3 ml-3 p-3" style="border: none; border-radius: 4px;"
+        id="btnConfirmPay">
+        Confirm Payment
+      </button>
+    </div>
+  </div>
+</body>
+
 </html>
