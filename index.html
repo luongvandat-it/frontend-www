@@ -41,11 +41,12 @@
                     <img src="./imgs/static/loved-book-icon.png" width="40px">
                 </a>
             </div>
-            <div class="col-2 mt-3 pt-4" id="btnLogin">
-                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-            </div>
-            <div class="col-2 mt-3 pt-4" id="btnLogout" hidden>
-                <button class="btn btn-dark">Logout</button>
+            <div class="col-2 mt-3 pt-4">
+                <div id="hiUser" style="margin-top: -16px;" hidden></div>
+                <button class="btn-dark p-2" style="border: none; border-radius: 4px;" data-bs-toggle="modal"
+                    data-bs-target="#loginModal" id="btnLogin">Login</button>
+                <button hidden class="btn-dark p-2" style="border: none; border-radius: 4px;" id="btnLogout"><a href=""
+                        class="text-light">Logout</a></button>
             </div>
         </div>
     </div>
@@ -55,7 +56,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg d-flex justify-content-center">
                 <ul class="navbar-nav">
-                    <a href="" class="nav-link text-light" id="showHome"> <b>HOME</b> </a>
+                    <a href="#" class="nav-link text-light" id="showHome"> <b>HOME</b> </a>
                 </ul>
                 <ul class="navbar-nav">
                     <a href="#" class="nav-link text-light"> <b>PRODUCTS</b> </a>
@@ -72,6 +73,7 @@
             </nav>
         </div>
     </div>
+    <!-- <button id="btnTEST">Test</button> -->
 
     <!-- Search Result -->
     <div class="container text-center justify-content-center">

@@ -92,13 +92,17 @@ $(document).ready(function () {
                     }
                 }
             });
+            $("#btnLogin").attr("hidden");
+            $("#btnLogout").removeAttr("hidden");
+            $("#hiUser").removeAttr("hidden");
+            $.ajax({
+                url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + email,
+                success: function (data) {
+                    $("#hiUser").text("Hi, " + data.userFirstName + " " + data.userLastName);
+                }
+            });
+            localStorage.setItem("emailLogin", email);
         }
-
-        $("#btnLogout").show();
-        $("#btnLogout").click(function () {
-            $("#btnLogin").show();
-            $("#btnLogout").hide();
-        });
     });
 
     // Header - Switch Login to Register
@@ -159,6 +163,11 @@ $(document).ready(function () {
         //     $("#btnSubmitSignUpClose").click();
         //     $("#registerModal").modal("hide");
         // }
+    });
+
+    // Navbar - Home
+    $('#showHome').click(function () {
+        $('#content').load('../html/home.html');
     });
 
     // Navbar - Sales
@@ -225,6 +234,5 @@ $(document).ready(function () {
 /*
     ERROR NOTE:
         1. Cant view details of book after search
-        2. After remove book from cart page being reload to home page
-        3. Login and Register :> Error sml
+        2. Register: cant add user to database
 */

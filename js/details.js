@@ -1,8 +1,5 @@
 $(document).ready(function () {
     var bookNameShowDetail = localStorage.getItem('bookNameShowDetail');
-    var bookAuthor;
-    var bookProvider;
-    var bookPublisher;
     $.ajax({
         url: "http://localhost:8080/api/books/search/findBookByBookTitleIgnoreCase?bookTitle=" + bookNameShowDetail,
         success: function (data) {
