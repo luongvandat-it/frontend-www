@@ -29,7 +29,7 @@ $(document).ready(function () {
                     content += '<div class="card">';
                     content += '<div class="card-body">';
                     content += '<div class="card-img-actions">';
-                    content += '<img src="' + books[i].bookImage + '" class="card-img img-fluid book-img" id="bookImage">';
+                    content += '<img src="' + books[i].bookImage + '" class="card-img img-fluid book-img bookCardImage" id="bookImage">';
                     content += '</div>';
                     content += '<div class="mb-2">';
                     content += '<h6 class="font-weight-semibold m-3">';
@@ -94,13 +94,6 @@ $(document).ready(function () {
             });
         }
 
-        // show name user login
-        var name = $("#txtEmailLogin").val();
-        var fullname = name.split("@");
-        $("#nameUserLogin").text(fullname[0]);
-
-
-        // append name login and button logout
         $("#btnLogout").show();
         $("#btnLogout").click(function () {
             $("#btnLogin").show();
@@ -115,7 +108,7 @@ $(document).ready(function () {
         $("#registerModal").modal();
     });
 
-    // Header - Register
+    // Header - Register -- ERROR
     $("#btnSubmitRegister").click(function () {
         var name = $("#txtName").val().trim();
         var fullname = name.split(" ");
@@ -186,18 +179,13 @@ $(document).ready(function () {
         $('#content').load('../html/introduction.html');
     });
 
-    // Details of book
-    $('#showDetails').click(function () {
-        $('#content').load('../html/details.html');
-    });
-
-    // click any add to cart button will get image name and price, number of book default is 1, then add to #booksInCart in cart.html
+    // Book - Add to cart
     $(document).on('click', '.btnAddToCard', function () {
         var bookName = $(this).parent().parent().parent().find('#bookName').text();
         var bookPrice = $(this).parent().parent().parent().find('#bookPrice').text();
         var bookImage = $(this).parent().parent().parent().find('#bookImage').attr('src');
         var bookNumber = 1;
-        // save to local storage to list added to cart
+
         var book = {
             bookName: bookName,
             bookPrice: bookPrice,
@@ -206,7 +194,7 @@ $(document).ready(function () {
         };
         var listBook = [];
         listBook.push(book);
-        // add to local storage if not exist or update if exist
+
         if (localStorage.getItem('listBook') == null) {
             localStorage.setItem('listBook', JSON.stringify(listBook));
         } else {
@@ -223,5 +211,20 @@ $(document).ready(function () {
             }
             localStorage.setItem('listBook', JSON.stringify(listBook));
         }
+        alert('Add to cart success!');
+    });
+
+    // Book - Details
+    $(document).on('click', '.bookCardImage', function () {
+        var bookNameShowDetail = $(this).parent().parent().find('#bookName').text();
+        localStorage.setItem('bookNameShowDetail', bookNameShowDetail);
+        $('#content').load('../html/details.html');
     });
 });
+
+/*
+    ERROR NOTE:
+        1. Cant view details of book after search
+        2. After remove book from cart page being reload to home page
+        3. Login and Register :> Error sml
+*/

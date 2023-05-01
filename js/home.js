@@ -10,7 +10,7 @@ $(document).ready(function () {
                 content += '<a href="#" id="bookCart">';
                 content += '<div class="card">';
                 content += '<div class="card-body">';
-                content += '<div class="card-img-actions">';
+                content += '<div class="card-img-actions bookCardImage">';
                 content += '<img src="' + books[i].bookImage + '" class="card-img img-fluid book-img" id="bookImage">';
                 content += '</div>';
                 content += '<div class="mb-2">';
