@@ -5,121 +5,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/details.js"></script>
+    <style>
+        .btn-outline-secondary {
+            border: 1px solid #ced4da;
+        }
+
+        .btnAddToCardFromDetail:hover {
+            background-color: #9e0010;
+            color: white;
+
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="row m-2">
-            <div class="col-4">
-                <img src="../imgs/static/b001.jpg" height="430px" id="bookImageDetail">
-            </div>
-
-            <div class="col-8 text-left">
-                <div class="row">
-                    <h4><b id="bookNameDetail">Thiền Trong Từng Phút Giây</b></h4>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-7">
-                        <p>Provider: <span class="text-primary" id="bookProviderDetail">Thái Hà</span></p>
-                        <p>Publisher: <b id="bookPublisherDetail">NXB Lao Động</b></p>
-                    </div>
-
-                    <div class="col">
-                        <p>Authors: <span><b id="bookAuthorNameDetail">Nguyễn Mạnh Hùng</b></span></p>
-                        <p>Slug: <b id="bookSlugDetail">Bìa mềm</b></p>
-                    </div>
-                </div>
-
-                <div class="row text-left">
-                    <div class="col-3">
-                        <h1 class="text-danger mt-3"><b>75.000 đ</b></h1>
-                    </div>
-                    <div class="col-2 mt-3">
-                        <del>89.000 đ</del>
-                        <span class="text-light bg-danger p-1" style="border-radius: 4px;">-16%</span>
-                    </div>
-                    <div class="col-2">
-                    </div>
-                </div>
-
-                <div class="row text-left mt-3 pl-3">
-                    <div>Thời gian giao hàng: <b>1 - 3 ngày</b> kể từ ngày đặt hàng</div>
-                </div>
-
-                <div class="row text-left pl-3">
-                    <div>Chính sách đổi trả <b>1 - 1</b> trong: <b>30 ngày</b></div>
-                </div>
-
-                <div class="row text-left pl-3 mt-4">
-                    <span class="mt-2 mr-4">Số lượng:</span>
-                    <div class="border">
-                        <button class="btn">-</button>
-                        <button style="border: none;">1</button>
-                        <button class="btn">+</button>
-                    </div>
-
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-4" style="margin-right: -40px;"><button class="border border-danger p-2"
-                            style="border-radius: 6px;" id="btnAddToCart"><span class="text-danger"> <i
-                                    class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng</span></button></div>
-                    <div class="col-4"><button class="bg-danger pt-2 pb-2 pr-5 pl-5 border border-danger"
-                            style="border-radius: 6px;" id="btnBuyNow"><span class="text-light">Mua ngay</span></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ml-4">
-            <div class="row mt-5 text-left ml-5">
-                <div class="col-12">
-                    <h4><b>Thông tin sản phẩm</b></h4>
-                    <div class="row">
-                        <div class="col-4 text-secondary">Mã hàng</div>
-                        <div class="col-4">B09123</div>
-                    </div>
-                    <div class="row mt-1">
-                        <div class="col-4 text-secondary">Tên nhà cung cấp</div>
-                        <div class="col-4 text-primary">Thái Hà</div>
-                    </div>
-
-                    <div class="row mt-1">
-                        <div class="col-4 text-secondary">Tác giả</div>
-                        <div class="col-4">Nguyễn Mạnh Hùng</div>
-                    </div>
-
-                    <div class="row mt-1">
-                        <div class="col-4 text-secondary">NXB</div>
-                        <div class="col-4">NXB Lao Động</div>
-                    </div>
-
-                    <div class="row mt-1">
-                        <div class="col-4 text-secondary">Năm XB</div>
-                        <div class="col-4">2020</div>
-                    </div>
-
-                    <div class="row mt-1">
-                        <div class="col-4 text-secondary">Trọng lượng (gr)</div>
-                        <div class="col-4">350</div>
-                    </div>
-
-                    <div class="row mt-1">
-                        <div class="col-4 text-secondary">Kích thước bao bì (cm)</div>
-                        <div class="col-4">20.5 x 13</div>
-                    </div>
-
-                    <div class="row mt-1">
-                        <div class="col-4 text-secondary">Số trang</div>
-                        <div class="col-4">323</div>
-                    </div>
-
-                    <div class="row mt-1 mb-5">
-                        <div class="col-4 text-secondary">Hình thức</div>
-                        <div class="col-4">Bìa Mềm</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="showDetails"></div>
     </div>
 </body>
 

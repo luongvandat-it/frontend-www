@@ -17,10 +17,17 @@
     <div class="container" id="bodyCart">
         <div class="row">
             <h2 class="mt-5"> <img src="../imgs/static/shopping_cart_icon.png" height="50px"> Your Cart</h2>
+            <div class="">
+                <button class="btn-danger p-2 mt-3" style="border: none; border-radius: 4px;" id="btnDeleteSelected">Delete Selected</button>
+            </div>
             <div class="mt-4">
                 <table class="table table-bordered text-center justify-content-center">
                     <thead>
                         <tr>
+                            <th>
+                                <input type="checkbox" name="checkAllCart" id="checkAllCart">
+                                <label for="checkAllCart">Select All</label>
+                            </th>
                             <th>Image</th>
                             <th>Name</th>
                             <th>Price</th>
@@ -30,12 +37,6 @@
                     </thead>
                     <tbody>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">Total (VAT Included)</td>
-                            <td class="totalPriceAllBookInCart">0 $</td>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
             <div class="text-danger p-2 m-2" id="errCheckout"></div>
