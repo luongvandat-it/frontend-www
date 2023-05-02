@@ -5,9 +5,33 @@ var listBookNumber = JSON.parse(localStorage.getItem("listBookSelectedQuantity")
 var totalPrice = localStorage.getItem("totalPrice");
 var totalAllBookPrice = 0
 var totalBill = 0;
+var userLogin = {};
+var bookToCheckout = {};
+
+function getUserByMail(email) {
+    $.ajax({
+        url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + email,
+        dataType: "json",
+        success: function (data) {
+            userLogin.userName = data.userName;
+            userLogin.userPassword = data.userPassword;
+            userLogin.userFirstName = data.userFirstName;
+            userLogin.userLastName = data.userLastName;
+            userLogin.userPhoneNumber = data.userPhoneNumber;
+            userLogin.userEmail = data.userEmail;
+            userLogin.userCreatedDate = data.userCreatedDate;
+            userLogin.userUpdatedDate = data.userUpdatedDate;
+            userLogin.role = {
+                roleId: "R006",
+                roleName: "Guest"
+            }
+        }
+    });
+}
 
 $(document).ready(function () {
     // Payment - Show
+    getUserByMail(emailLogin);
     $.ajax({
         url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + emailLogin,
         success: function (data) {
@@ -64,14 +88,56 @@ $(document).ready(function () {
     // Payment - Confirm
     $("#btnConfirmPay").click(function () {
         var address = $("#address").val();
+        var note = $("#note").val();
+
 
         var regexAddress = /^[a-zA-Z0-9 ]{2,30}$/;
         if (regexAddress.test(address) == false) {
             $("#errPayment").text("Address Invalid!");
         } else {
+            // save order
+            var order = {
+                orderDate: new Date(),
+                shippingAddress: address,
+                orderNote: note,
+                orderDiscount: "0%",
+                orderStatus: "Processing",
+                user_: userLogin
+            };
+            localStorage.setItem("order", JSON.stringify(order));
+            $.ajax({
+                url: "http://localhost:8080/api/order_s/add",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(order)
+            });
+
+            // save order detail, before preprocess price of book parse to float 10.5 $ to float 10.5
+            for (var i = 0; i < listBookCheckout.length; i++) {
+                // get order from local storage
+                var orderTemp = JSON.parse(localStorage.getItem("order"));
+                $.ajax({
+                    url: "http://localhost:8080/api/orderDetails/add",
+                    type: "POST",
+                    data: {
+                        price: parseFloat(listBookCheckout[i].bookPrice.split(" ")[0]),
+                        quantity: listBookCheckout[i].bookNumber,
+                        orderDate: new Date(orderTemp.orderDate),
+                        bookTitle: listBookCheckout[i].bookName
+                    },
+                    success: function (data) {
+                        alert("Order Detail Success!");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Order Detail Error!");
+                    }
+                });
+
+            }
+
+            // process after payment
             $("#errPayment").text("");
             alert("Payment Success!");
-            // Remove after confirm
             for (var i = 0; i < listBookCheckout.length; i++) {
                 for (var j = 0; j < listBook.length; j++) {
                     if (listBookCheckout[i].bookName == listBook[j].bookName) {
