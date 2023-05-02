@@ -1,7 +1,10 @@
 var emailLogin = localStorage.getItem("emailLogin");
 var listBookCheckout = JSON.parse(localStorage.getItem("listBookCheckout"));
-var listBookNumber = JSON.parse(localStorage.getItem("listBookNumber"));
+var listBook = JSON.parse(localStorage.getItem("listBook"));
+var listBookNumber = JSON.parse(localStorage.getItem("listBookSelectedQuantity"));
 var totalPrice = localStorage.getItem("totalPrice");
+var totalAllBookPrice = 0
+var totalBill = 0;
 
 $(document).ready(function () {
     // Payment - Show
@@ -26,12 +29,17 @@ $(document).ready(function () {
         var bookPrice = listBookCheckout[i].bookPrice.split(" ")[0];
         var bookPriceNumber = parseFloat(bookPrice);
         var totalBookPrice = bookPriceNumber * listBookNumber[i];
+        totalAllBookPrice += totalBookPrice;
+        totalBill += totalBookPrice;
         tableBodyContent += "<td>" + totalBookPrice + " $</td>";
         tableBodyContent += "</tr>";
     }
     tableBodyContent += "<tr>";
+    tableBodyContent += "<td colspan='5'>Total Price</td>";
+    tableBodyContent += "<td>" + totalAllBookPrice + " $</td>";
+    tableBodyContent += "<tr>";
     tableBodyContent += "<td colspan='5'>Transport Fee (8%)</td>";
-    tableBodyContent += "<td>" + (totalPrice * 0.08).toFixed(2) + " $</td>";
+    tableBodyContent += "<td>" + (totalAllBookPrice * 0.08).toFixed(2) + " $</td>";
     tableBodyContent += "</tr>";
     tableBodyContent += "<tr>";
     tableBodyContent += "<td colspan='5'>Discount</td>";
@@ -39,7 +47,7 @@ $(document).ready(function () {
     tableBodyContent += "</tr>";
     tableBodyContent += "<tr class='text-light bg-danger h4'>";
     tableBodyContent += "<td colspan='5'><b>Total Bill</b></td>";
-    tableBodyContent += "<td><b>" + (totalPrice * 1.08).toFixed(2) + " $</b></td>";
+    tableBodyContent += "<td><b>" + (totalBill * 1.08).toFixed(2) + " $</b></td>";
     tableBodyContent += "</tr>";
     $("tbody").append(tableBodyContent);
 
@@ -63,6 +71,15 @@ $(document).ready(function () {
         } else {
             $("#errPayment").text("");
             alert("Payment Success!");
+            // Remove after confirm
+            for (var i = 0; i < listBookCheckout.length; i++) {
+                for (var j = 0; j < listBook.length; j++) {
+                    if (listBookCheckout[i].bookName == listBook[j].bookName) {
+                        listBook.splice(j, 1);
+                    }
+                }
+            }
+            localStorage.setItem("listBook", JSON.stringify(listBook));
             location.reload();
         }
     });
