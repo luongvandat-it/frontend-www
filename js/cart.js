@@ -99,12 +99,13 @@ $(document).ready(function () {
                 }
                 localStorage.setItem("listBookCheckout", JSON.stringify(listBookCheckout));
 
-                var listBookNumber = [];
-                $("tbody tr").each(function () {
-                    var bookNumber = $(this).find("input[name='bookNumber']").val();
-                    listBookNumber.push(bookNumber);
+                // save quantity of selected book
+                var listBookSelectedQuantity = [];
+                $("input[name='select']:checked").each(function () {
+                    var bookQuantity = $(this).parent().parent().find("input[name='bookNumber']").val();
+                    listBookSelectedQuantity.push(bookQuantity);
                 });
-                localStorage.setItem("listBookNumber", JSON.stringify(listBookNumber));
+                localStorage.setItem("listBookSelectedQuantity", JSON.stringify(listBookSelectedQuantity));
 
                 var listBookTotalPrice = [];
                 $("tbody tr").each(function () {

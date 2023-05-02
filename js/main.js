@@ -1,4 +1,28 @@
 $(document).ready(function () {
+
+
+
+    // Check Login
+    if (localStorage.getItem("emailLogin") != null) {
+        $("#btnLogin").hide();
+        $("#btnLogout").removeAttr("hidden");
+        $("#hiUser").removeAttr("hidden");
+        $.ajax({
+            url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + localStorage.getItem("emailLogin"),
+            success: function (data) {
+                $("#hiUser").text("Hi, " + data.userFirstName + " " + data.userLastName);
+            }
+        });
+    }
+
+    // Logout
+    $("#btnLogout").click(function () {
+        localStorage.removeItem("emailLogin");
+        $("#btnLogout").hide();
+        $("#btnLogin").removeAttr("hidden");
+        $("#hiUser").hide();
+    });
+
     // Load content home page
     $('#content').load('./html/home.html');
     var navbar = $(".navbar-container");
@@ -25,11 +49,11 @@ $(document).ready(function () {
                 content += '</div>';
                 for (var i = 0; i < books.length; i++) {
                     content += '<div class="col-4 mt-2">';
-                    content += '<a href="#" class="bookCart">';
+                    content += '<a href="#" id="bookCart">';
                     content += '<div class="card">';
                     content += '<div class="card-body">';
-                    content += '<div class="card-img-actions">';
-                    content += '<img src="' + books[i].bookImage + '" class="card-img img-fluid book-img bookCardImage" id="bookImage">';
+                    content += '<div class="card-img-actions bookCardImage">';
+                    content += '<img src="' + books[i].bookImage + '" class="card-img img-fluid book-img" id="bookImage">';
                     content += '</div>';
                     content += '<div class="mb-2">';
                     content += '<h6 class="font-weight-semibold m-3">';
@@ -37,7 +61,7 @@ $(document).ready(function () {
                     content += '</h6>';
                     content += '</div>';
                     content += '<h5 id="bookPrice">' + books[i].bookPrice + ' $</h5>';
-                    content += '<button type="button" class="btn btn-primary text-light btnAddToCard"> Add to cart</button>';
+                    content += '<button type="button" class="btn btn-outline-primary text-dark btnAddToCard"> Add to cart</button>';
                     content += '</div>';
                     content += '</div>';
                     content += '</a>';
@@ -112,58 +136,63 @@ $(document).ready(function () {
         $("#registerModal").modal();
     });
 
-    // Header - Register -- ERROR
+    // Header - Register
     $("#btnSubmitRegister").click(function () {
         var name = $("#txtName").val().trim();
         var fullname = name.split(" ");
+        var firstName = fullname[0];
+        var lastName = "";
+        for (var i = 1; i < fullname.length; i++) {
+            lastName += fullname[i];
+        }
         var email = $("#txtEmail").val();
         var phone = $("#txtPhone").val();
         var pass = $("#txtPass").val().trim();
         var repass = $("#txtRepass").val();
-
         var regexName = /^[a-zA-Z ]{2,30}$/;
         var regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
         var regexPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 
-        // if (regexName.test(name) == false) {
-        //     $("#errRegister").text("Invalid Name!");
-        // } else if (regexEmail.test(email) == false) {
-        //     $("#errRegister").text("Invalid Email!");
-        // } else if (regexPhone.test(phone) == false) {
-        //     $("#errRegister").text("Invalid Phone Number!");
-        // } else if (pass.length < 6) {
-        //     $("#errRegister").text("Invalid Password!");
-        // } else if (pass != repass) {
-        //     $("#errRegister").text("Retype password not match!");
-        // } else {
-        //     $("#errRegister").text("");
-        $.ajax({
-            url: "http://localhost:8080/api/user_s/add",
-            type: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                "userEmail": "a@gmail.com",
-                "userPassword": "123456",
-                // "role": {
-                //     "roleId": "R001",
-                //     "roleName": "Admin"
-                // }
-            }),
-            success: function (data) {
-                console.log(data + "success");
-                alert("Register Success!");
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.log(xhr.responseText);
-                alert("Register Error!");
-            }
-        });
+        if (regexName.test(name) == false) {
+            $("#errRegister").text("Invalid Name!");
+        } else if (regexEmail.test(email) == false) {
+            $("#errRegister").text("Invalid Email!");
+        } else if (regexPhone.test(phone) == false) {
+            $("#errRegister").text("Invalid Phone Number!");
+        } else if (pass.length < 6) {
+            $("#errRegister").text("Invalid Password!");
+        } else if (pass != repass) {
+            $("#errRegister").text("Retype password not match!");
+        } else {
+            $("#errRegister").text("");
+            var userAdd = {
+                userName: fullname.join(""),
+                userPassword: pass,
+                userFirstName: firstName,
+                userLastName: lastName,
+                userPhoneNumber: phone,
+                userEmail: email,
+                role: {
+                    roleId: "R006",
+                    roleName: "Guest"
+                }
+            };
 
-        //     $("#btnSubmitSignUpClose").click();
-        //     $("#registerModal").modal("hide");
-        // }
+            $.ajax({
+                url: "http://localhost:8080/api/user_s/add",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(userAdd),
+                success: function (data) {
+                    console.log(data + "success");
+                }, error: function (data) {
+                    console.log(data + "error");
+                }
+            });
+        }
     });
+
+
 
     // Navbar - Home
     $('#showHome').click(function () {
@@ -228,11 +257,14 @@ $(document).ready(function () {
         var bookNameShowDetail = $(this).parent().parent().find('#bookName').text();
         localStorage.setItem('bookNameShowDetail', bookNameShowDetail);
         $('#content').load('../html/details.html');
+        $('#searchResult').html('');
     });
 });
 
 /*
+    TODO: 
+        - Orders and order details
+        - Save payment info and sign up
+    
     ERROR NOTE:
-        1. Cant view details of book after search
-        2. Register: cant add user to database
 */
