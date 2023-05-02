@@ -23,6 +23,22 @@ function loadCartPage() {
     $("tbody").append(content);
 }
 
+function checkLogin() {
+    if (localStorage.getItem("emailLogin") != null) {
+        $("#btnLogin").hide();
+        $("#btnLogout").removeAttr("hidden");
+        $("#hiUser").removeAttr("hidden");
+        $.ajax({
+            url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + localStorage.getItem("emailLogin"),
+            success: function (data) {
+                $("#hiUser").text("Hi, " + data.userFirstName + " " + data.userLastName);
+            }
+        });
+        return true;
+    }
+    return false;
+}
+
 $(document).ready(function () {
     // Cart - load cart
     loadCartPage();
@@ -84,7 +100,9 @@ $(document).ready(function () {
         $("input[name='select']:checked").each(function () {
             listBookSelected.push($(this).val());
         });
-        if (listBookSelected.length == 0) {
+        if (!checkLogin()) {
+            alert("Please login to checkout!");
+        } else if (listBookSelected.length == 0) {
             alert("Please select book(s) to checkout!");
         } else {
             var confirmCheckout = confirm("Are you sure to checkout selected book(s)?");
@@ -116,9 +134,9 @@ $(document).ready(function () {
 
                 var totalPrice = $("tbody tr:last td:last").text().replace(" $", "");
                 localStorage.setItem("totalPrice", totalPrice);
+                $("#bodyCart").empty();
+                $("#bodyCart").load("../html/payment.html");
             }
-            $("#bodyCart").empty();
-            $("#bodyCart").load("../html/payment.html");
         }
     });
 });
