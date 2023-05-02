@@ -1,8 +1,4 @@
-$(document).ready(function () {
-
-
-
-    // Check Login
+function checkLogin() {
     if (localStorage.getItem("emailLogin") != null) {
         $("#btnLogin").hide();
         $("#btnLogout").removeAttr("hidden");
@@ -13,7 +9,14 @@ $(document).ready(function () {
                 $("#hiUser").text("Hi, " + data.userFirstName + " " + data.userLastName);
             }
         });
+        return true;
     }
+    return false;
+}
+
+$(document).ready(function () {
+    // Check Login
+    checkLogin();
 
     // Logout
     $("#btnLogout").click(function () {
@@ -184,15 +187,21 @@ $(document).ready(function () {
                 contentType: "application/json",
                 data: JSON.stringify(userAdd),
                 success: function (data) {
-                    console.log(data + "success");
+                    $("#btnSubmitRegisterClose").click();
+                    $("#registerModal").modal("hide");
+                    $("#btnLogin").hide();
+                    $("#btnLogout").removeAttr("hidden");
+                    $("#hiUser").removeAttr("hidden");
+                    $("#hiUser").text("Hi, " + firstName + " " + lastName);
+                    localStorage.setItem("emailLogin", email);
+                    location.reload();
+                    alert(data);
                 }, error: function (data) {
-                    console.log(data + "error");
+                    alert(data);
                 }
             });
         }
     });
-
-
 
     // Navbar - Home
     $('#showHome').click(function () {
@@ -263,8 +272,10 @@ $(document).ready(function () {
 
 /*
     TODO: 
+        - Save payment info
+        - Change number of book in cart
         - Orders and order details
-        - Save payment info and sign up
+        - Advanced: sent email about sign up and order
     
     ERROR NOTE:
 */
