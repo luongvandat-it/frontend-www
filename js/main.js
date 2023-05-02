@@ -272,9 +272,8 @@ $(document).ready(function () {
 
 /*
     TODO: 
-        - Save payment info
+        - Save save and view order details
         - Change number of book in cart
-        - Orders and order details
         - Advanced: sent email about sign up and order
     
     ERROR NOTE:
