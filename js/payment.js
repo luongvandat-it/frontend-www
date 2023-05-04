@@ -117,7 +117,7 @@ $(document).ready(function () {
                 }
             });
 
-            // save order detail, before preprocess price of book parse to float 10.5 $ to float 10.5
+            // save order detail
             for (var i = 0; i < listBookCheckout.length; i++) {
                 console.log({
                     price: parseFloat(listBookCheckout[i].bookPrice.split(" ")[0]),
