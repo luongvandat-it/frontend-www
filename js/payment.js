@@ -89,7 +89,7 @@ $(document).ready(function () {
     $("#btnConfirmPay").click(function () {
         var address = $("#address").val();
         var note = $("#note").val();
-
+        var orderId = "";
 
         var regexAddress = /^[a-zA-Z0-9 ]{2,30}$/;
         if (regexAddress.test(address) == false) {
@@ -109,20 +109,32 @@ $(document).ready(function () {
                 url: "http://localhost:8080/api/order_s/add",
                 type: "POST",
                 contentType: "application/json",
-                data: JSON.stringify(order)
+                data: JSON.stringify(order),
+                success: function (data) {
+                    orderId += data;
+                    localStorage.setItem("orderIdTemp", JSON.stringify(orderId));
+                    alert(orderId)
+                }
             });
 
             // save order detail, before preprocess price of book parse to float 10.5 $ to float 10.5
             for (var i = 0; i < listBookCheckout.length; i++) {
-                // get order from local storage
-                var orderTemp = JSON.parse(localStorage.getItem("order"));
+                console.log({
+                    price: parseFloat(listBookCheckout[i].bookPrice.split(" ")[0]),
+                    quantity: parseInt(listBookCheckout[i].bookNumber),
+                    orderId: JSON.parse(localStorage.getItem("orderIdTemp")),
+                    bookTitle: listBookCheckout[i].bookName
+                })
+
                 $.ajax({
                     url: "http://localhost:8080/api/orderDetails/add",
                     type: "POST",
+                    contentType: "application/json",
+                    async: false,
                     data: {
                         price: parseFloat(listBookCheckout[i].bookPrice.split(" ")[0]),
-                        quantity: listBookCheckout[i].bookNumber,
-                        orderDate: new Date(orderTemp.orderDate),
+                        quantity: parseInt(listBookCheckout[i].bookNumber),
+                        orderId: JSON.parse(localStorage.getItem("orderIdTemp")),
                         bookTitle: listBookCheckout[i].bookName
                     },
                     success: function (data) {
@@ -132,7 +144,6 @@ $(document).ready(function () {
                         alert("Order Detail Error!");
                     }
                 });
-
             }
 
             // process after payment
@@ -146,7 +157,7 @@ $(document).ready(function () {
                 }
             }
             localStorage.setItem("listBook", JSON.stringify(listBook));
-            location.reload();
+            // location.reload();
         }
     });
 });

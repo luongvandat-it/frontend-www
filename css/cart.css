@@ -1,0 +1,45 @@
+table td {
+    vertical-align: middle !important;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+table {
+    margin: 0 auto;
+}
+
+table td,
+table th {
+    padding: 10px;
+}
+
+table td {
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+    text-align: center;
+}
+
+label[for="checkAllCart"] {
+    font-weight: normal;
+}
+
+#btnCheckout {
+    font-size: 20px;
+    padding: 10px;
+    width: 100%;
+}
+
+#errCheckout {
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+}
