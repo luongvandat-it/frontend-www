@@ -218,6 +218,11 @@ $(document).ready(function () {
 
     // Navbar - Orders
     $('#showOrders').click(function () {
+        // check if not login show login modal
+        if (localStorage.getItem('emailLogin') == null) {
+            $('#btnLogin').click();
+            return false;
+        }
         $('#content').load('../html/orders.html');
     });
 
