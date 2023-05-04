@@ -218,7 +218,6 @@ $(document).ready(function () {
 
     // Navbar - Orders
     $('#showOrders').click(function () {
-        // check if not login show login modal
         if (localStorage.getItem('emailLogin') == null) {
             $('#btnLogin').click();
             return false;
@@ -277,7 +276,7 @@ $(document).ready(function () {
 
 /*
     TODO: 
-        - Save save and view order details
+        - Save and view order details
         - Change number of book in cart
         - Advanced: sent email about sign up and order
     
