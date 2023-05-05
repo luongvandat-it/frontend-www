@@ -113,37 +113,16 @@ $(document).ready(function () {
                 success: function (data) {
                     orderId += data;
                     localStorage.setItem("orderIdTemp", JSON.stringify(orderId));
-                    alert(orderId)
                 }
             });
 
             // save order detail
             for (var i = 0; i < listBookCheckout.length; i++) {
-                console.log({
-                    price: parseFloat(listBookCheckout[i].bookPrice.split(" ")[0]),
-                    quantity: parseInt(listBookCheckout[i].bookNumber),
-                    orderId: JSON.parse(localStorage.getItem("orderIdTemp")),
-                    bookTitle: listBookCheckout[i].bookName
-                })
-
-                $.ajax({
-                    url: "http://localhost:8080/api/orderDetails/add",
-                    type: "POST",
-                    contentType: "application/json",
-                    async: false,
-                    data: {
-                        price: parseFloat(listBookCheckout[i].bookPrice.split(" ")[0]),
-                        quantity: parseInt(listBookCheckout[i].bookNumber),
-                        orderId: JSON.parse(localStorage.getItem("orderIdTemp")),
-                        bookTitle: listBookCheckout[i].bookName
-                    },
-                    success: function (data) {
-                        alert("Order Detail Success!");
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert("Order Detail Error!");
-                    }
-                });
+                $.get("http://localhost:8080/api/orderDetails/add?price=" + parseFloat(listBookCheckout[i].bookPrice.split(" ")[0])
+                    + "&quantity=" + parseInt(listBookCheckout[i].bookNumber)
+                    + "&orderId=" + JSON.parse(localStorage.getItem("orderIdTemp"))
+                    + "&bookTitle=" + listBookCheckout[i].bookName
+                );
             }
 
             // process after payment
@@ -157,10 +136,9 @@ $(document).ready(function () {
                 }
             }
             localStorage.setItem("listBook", JSON.stringify(listBook));
-            // location.reload();
+            // send mail
+            $.get("http://localhost:8080/api/user_s/mail?email=" + emailLogin + "&text=Thanks+for+buy+book!+You+can+check+your+order+at+Leaf+Book+page");
+            location.reload();
         }
-
-        // send mail
-        $.get("http://localhost:8080/api/user_s/mail?email=" + emailLogin + "&text=Thanks+for+buy+book!+You+can+check+your+order+at+Leaf+Book+page");
     });
 });

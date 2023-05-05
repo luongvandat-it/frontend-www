@@ -25,6 +25,10 @@ function getOrders() {
         dataType: "json",
         success: function (data) {
             ordersOfUser = data._embedded.order_s;
+            // sort orders by order date
+            ordersOfUser.sort(function (a, b) {
+                return new Date(b.orderDate) - new Date(a.orderDate);
+            });
             var html = "";
             var count = 1;
             $.each(ordersOfUser, function (key, item) {
@@ -32,12 +36,12 @@ function getOrders() {
                 html += "<td>" + count + "</td>";
                 html += "<td>" + user.phone + "</td>";
                 html += "<td>" + user.name + "</td>";
-                html += "<td>" + item.orderDate.split("T")[0] + "</td>";
-                html += "<td>" + '50 $' + "</td>";
+                var orderDate = new Date(item.orderDate);
+                html += "<td>" + orderDate.toString().substr(0, 24) + "</td>";
                 html += "<td>" + "Paid" + "</td>";
                 html += "<td>" + item.orderStatus + "</td>";
                 html +=
-                    "<td><a style='cursor: pointer' class='showOrderDetail'><img src='../imgs/static/address-icon.png' height='50px'></a></td>";
+                    "<td hidden><a style='cursor: pointer' class='showOrderDetail'><img src='../imgs/static/address-icon.png' height='50px'></a></td>";
                 html += "</tr>";
                 count++;
             });
@@ -72,14 +76,6 @@ function getOrderDetail(orderId) {
         }
     });
 }
-
-$(document).on("click", ".showOrderDetail", function () {
-    var orderId = $(this).closest("tr").find("td:eq(0)").text();
-    $("tbody").empty();
-    getOrderDetail(orderId);
-    $("#orderDetailModal").modal("show");
-});
-
 
 $(document).ready(function () {
     getUserInfo();

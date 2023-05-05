@@ -228,6 +228,11 @@ $(document).ready(function () {
         $('#content').load('../html/orders.html');
     });
 
+    // showOrderDetail
+    $(document).on('click', '.showOrderDetail', function () {
+        $('#content').load('../html/orderDetails.html');
+    });
+
     // Navbar - About
     $('#showIntroduction').click(function () {
         $('#content').load('../html/introduction.html');
