@@ -1,5 +1,3 @@
-// {import { Email } from './smtp.js';
-
 function checkLogin() {
     if (localStorage.getItem("emailLogin") != null) {
         $("#btnLogin").hide();
@@ -131,25 +129,6 @@ $(document).ready(function () {
                 }
             });
             localStorage.setItem("emailLogin", email);
-
-            // NOTE: SHOULDN'T USE BECAUSE IT'S NOT SAFE
-
-            // Email.send({
-            //     Host: "smtp.gmail.com",
-            //     Username: "actestnhe1111@gmail.com",
-            //     Password: "llomobkdeidabbpm",
-            //     To: email,
-            //     From: "actestnhe1111@gmail.com",
-            //     Subject: "Thanks for sign up account !!",
-            //     Body: "Well that was easy!!",
-            // })
-            //     .then(function (message) {
-            //         alert("mail sent successfully")
-            //     })
-            //     .catch(function (err) {
-            //         alert("error")
-            //     }
-            //     );
         }
     });
 
@@ -221,6 +200,9 @@ $(document).ready(function () {
                     alert(data);
                 }
             });
+
+            // sent email sign up
+            $.get("http://localhost:8080/api/user_s/mail?email=" + email + "&text=Thank+you+for+registering+with+us.");
         }
     });
 
@@ -294,9 +276,3 @@ $(document).ready(function () {
         $('#searchResult').html('');
     });
 });
-
-/*
-    TODO: 
-        - Save and view order details
-        - Email
-*/

@@ -60,7 +60,7 @@ $(document).ready(function () {
     }
     tableBodyContent += "<tr>";
     tableBodyContent += "<td colspan='5'>Total Price</td>";
-    tableBodyContent += "<td>" + (totalAllBookPrice*1.03).toFixed(2) + " $</td>";
+    tableBodyContent += "<td>" + (totalAllBookPrice * 1.03).toFixed(2) + " $</td>";
     tableBodyContent += "<tr>";
     tableBodyContent += "<td colspan='5'>Transport Fee (8%)</td>";
     tableBodyContent += "<td>" + (totalAllBookPrice * 0.08).toFixed(2) + " $</td>";
@@ -159,5 +159,8 @@ $(document).ready(function () {
             localStorage.setItem("listBook", JSON.stringify(listBook));
             // location.reload();
         }
+
+        // send mail
+        $.get("http://localhost:8080/api/user_s/mail?email=" + emailLogin + "&text=Thanks+for+buy+book!+You+can+check+your+order+at+Leaf+Book+page");
     });
 });
