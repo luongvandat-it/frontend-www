@@ -60,7 +60,7 @@ $(document).ready(function () {
     }
     tableBodyContent += "<tr>";
     tableBodyContent += "<td colspan='5'>Total Price</td>";
-    tableBodyContent += "<td>" + totalAllBookPrice + " $</td>";
+    tableBodyContent += "<td>" + (totalAllBookPrice*1.03).toFixed(2) + " $</td>";
     tableBodyContent += "<tr>";
     tableBodyContent += "<td colspan='5'>Transport Fee (8%)</td>";
     tableBodyContent += "<td>" + (totalAllBookPrice * 0.08).toFixed(2) + " $</td>";
@@ -71,7 +71,7 @@ $(document).ready(function () {
     tableBodyContent += "</tr>";
     tableBodyContent += "<tr class='text-light bg-danger h4'>";
     tableBodyContent += "<td colspan='5'><b>Total Bill</b></td>";
-    tableBodyContent += "<td><b>" + (totalBill * 1.08).toFixed(2) + " $</b></td>";
+    tableBodyContent += "<td><b>" + (totalBill * 1.11).toFixed(2) + " $</b></td>";
     tableBodyContent += "</tr>";
     $("tbody").append(tableBodyContent);
 

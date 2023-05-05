@@ -1,3 +1,5 @@
+// {import { Email } from './smtp.js';
+
 function checkLogin() {
     if (localStorage.getItem("emailLogin") != null) {
         $("#btnLogin").hide();
@@ -129,6 +131,25 @@ $(document).ready(function () {
                 }
             });
             localStorage.setItem("emailLogin", email);
+
+            // NOTE: SHOULDN'T USE BECAUSE IT'S NOT SAFE
+
+            // Email.send({
+            //     Host: "smtp.gmail.com",
+            //     Username: "actestnhe1111@gmail.com",
+            //     Password: "llomobkdeidabbpm",
+            //     To: email,
+            //     From: "actestnhe1111@gmail.com",
+            //     Subject: "Thanks for sign up account !!",
+            //     Body: "Well that was easy!!",
+            // })
+            //     .then(function (message) {
+            //         alert("mail sent successfully")
+            //     })
+            //     .catch(function (err) {
+            //         alert("error")
+            //     }
+            //     );
         }
     });
 
@@ -277,8 +298,5 @@ $(document).ready(function () {
 /*
     TODO: 
         - Save and view order details
-        - Change number of book in cart
-        - Advanced: sent email about sign up and order
-    
-    ERROR NOTE:
+        - Email
 */
