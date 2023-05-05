@@ -249,7 +249,8 @@ $(document).ready(function () {
             bookName: bookName,
             bookPrice: bookPrice,
             bookImage: bookImage,
-            bookNumber: bookNumber
+            bookNumber: bookNumber,
+            bookStatus: false
         };
         var listBook = [];
         listBook.push(book);

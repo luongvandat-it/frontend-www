@@ -4,7 +4,12 @@ function loadCartPage() {
     var totalPrice = 0;
     for (var i = 0; i < listBook.length; i++) {
         content += "<tr>";
-        content += "<td><input style='width: 30px;height:30px' type='checkbox' name='select' value='" + listBook[i].bookName + "'></td>";
+        if (listBook[i].bookStatus == true) {
+            content += "<td><input type='checkbox' name='select' style='width: 40px; height: 40px; cursor:pointer' value='" + listBook[i].bookName + "' checked></td>";
+            totalPrice += parseFloat(listBook[i].bookPrice.replace(" $", "").trim()).toFixed(2) * listBook[i].bookNumber * 1.03;
+        } else {
+            content += "<td><input type='checkbox' name='select' style='width: 40px; height: 40px; cursor:pointer' value='" + listBook[i].bookName + "'></td>";
+        }
         content += "<td><img src='" + listBook[i].bookImage + "' width='100px' height='100px'></td>";
         content += "<td>" + listBook[i].bookName + "</td>";
         content += "<td>" + listBook[i].bookPrice + "</td>";
@@ -13,14 +18,14 @@ function loadCartPage() {
         content += "<button class='btn-primary' style='border:none; border-radius: 4px;padding:10px' onclick='plusBook(\"" + listBook[i].bookName + "\"," + listBook[i].bookNumber + ");'>+</button></td>";
         var price = listBook[i].bookPrice.replace(" $", "");
         var totalPriceOfOne = parseFloat(price.trim()).toFixed(2) * listBook[i].bookNumber;
-        content += "<td>" + totalPriceOfOne + " $</td>";
+        content += "<td>" + totalPriceOfOne.toFixed(2) + " $</td>";
         content += "</tr>";
     }
     content += "<tr>";
     content += "<td colspan='3'>Total Price Selected Book (Tax 3% Included)</td>";
-    content += "<td colspan='3'><b class='text-danger h3'>" + totalPrice + " $</b></td>";
+    content += "<td colspan='3'><b class='text-danger h3'>" + totalPrice.toFixed(2) + " $</b></td>";
     content += "</tr>";
-    localStorage.setItem("totalPriceInCart", totalPrice);
+    localStorage.setItem("totalPriceInCart", totalPrice.toFixed(2));
     $("tbody").append(content);
 }
 
@@ -106,6 +111,12 @@ $(document).ready(function () {
             totalPrice += parseFloat(price.trim()).toFixed(2) * bookNumber * 1.03;
         });
         $("tbody tr:last td:last").html("<b class='text-danger h3'>" + totalPrice.toFixed(2) + " $</b>");
+        // change listBook.bookStatus
+        var listBook = JSON.parse(localStorage.getItem("listBook"));
+        for (var i = 0; i < listBook.length; i++) {
+            listBook[i].bookStatus = this.checked;
+        }
+        localStorage.setItem("listBook", JSON.stringify(listBook));
     }
     );
 
@@ -118,6 +129,14 @@ $(document).ready(function () {
             totalPrice += parseFloat(price.trim()).toFixed(2) * bookNumber * 1.03;
         });
         $("tbody tr:last td:last").html("<b class='text-danger h3'>" + totalPrice.toFixed(2) + " $</b>");
+        // change listBook.bookStatus
+        var listBook = JSON.parse(localStorage.getItem("listBook"));
+        for (var i = 0; i < listBook.length; i++) {
+            if (listBook[i].bookName == $(this).val()) {
+                listBook[i].bookStatus = this.checked;
+            }
+        }
+        localStorage.setItem("listBook", JSON.stringify(listBook));
     });
 
     // Delete book
@@ -201,4 +220,12 @@ $(document).ready(function () {
             $("#checkAllCart").prop('checked', false);
         }
     });
+
+    // uncheck one -> uncheck all then recalculate total price
+    $("input[name='select']").click(function () {
+        if ($("input[name='select']:checked").length == 0) {
+            $("tbody tr:last td:last").html("<b class='text-danger h3'>0.00 $</b>");
+        }
+    }
+    );
 });
