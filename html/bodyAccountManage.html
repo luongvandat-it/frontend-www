@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/accountManage.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid" id="AccountManager">
+        <!-- breadcrumb -->
+        <div class="row m-0">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Account Management</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- search -->
+        <div class="row border pt-3 pb-3 ml-1 bg-light">
+            <div class="col-1">
+                <label class="float-end" for="">search Account:</label>
+            </div>
+            <div class="col-4">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 ">
+                        <input type="text" class="form-control" id="txtSearch" placeholder="search for phone">
+                    </div>
+                </form>
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary searchAccount">SEARCH</button>
+            </div>
+            <div class="col-2">
+                <button type="button" id="btnRefresh" class="btn btn-info">REFRESH</button>
+            </div>
+            <div class="col-3">
+                <button type="button" id="btnAdd" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAccount">ADD ACCOUNT</button>
+            </div>
+        </div>
+
+        <!-- table -->
+        <div class="row border ml-1">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col"><input type="checkbox" name="chkAll"></th>
+                        <th>User name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Feature</th>
+                    </tr>
+                </thead>
+                <tbody id="tableAccount">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<!-- Modal -->
+<div class="modal fade" id="modalAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-inline-flex">
+                    <div class="mb-3 me-3">
+                        <label for="userEmail" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="userEmail">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="userPhoneNumber" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="userPhoneNumber">
+                    </div>
+                </form>
+                <form class="d-inline-flex">
+                    <div class="mb-3 me-3">
+                        <label for="userFirstName" class="form-label">FirstName</label>
+                        <input type="text" class="form-control" id="userFirstName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="userLastName" class="form-label">LastName</label>
+                        <input type="text" class="form-control" id="userLastName">
+                    </div>
+                </form>
+
+                <form class="d-inline-flex">
+                    <div class="mb-3 me-3">
+                        <label for="userPassword" class="form-label">Password</label>
+                        <input type="text" class="form-control" id="userPassword">
+                    </div>
+                    <div class="mb-3">
+                        <label for="userPassword" class="form-label">Re-Password</label>
+                        <input type="text" class="form-control" id="userRePassword">
+                    </div>
+                </form>
+                <form>
+                    <div class="mb-3 me-3">
+                        <label for="role" class="form-label">role</label>
+                        <select class="form-select form-select-lg mb-3 role" aria-label=".form-select-lg">
+                                
+                        </select>
+                    </div>
+                </form>
+                <h2 class="text-danger" id="errRegisterAccount">*</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeModal" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="submitModal">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

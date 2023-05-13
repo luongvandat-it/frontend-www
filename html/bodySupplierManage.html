@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/categoryManage.js"></script>
+    <script src="../js/supplierManage.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-    <div class="container-fluid" id="CategoryManage">
+    <div class="container-fluid" id="supplierManage">
         <!-- breadcrumb -->
         <div class="row m-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item">Product Management</li>
-                    <li class="breadcrumb-item active" aria-current="page">Category</li>
+                    <li class="breadcrumb-item active" aria-current="page">Suppliers</li>
                 </ol>
             </nav>
         </div>
@@ -25,23 +25,23 @@
         <!-- search -->
         <div class="row border pt-3 pb-3 ml-1 bg-light">
             <div class="col-1">
-                <label class="float-end" for="">search Category:</label>
+                <label class="float-end" for="">search Supplier:</label>
             </div>
             <div class="col-4">
                 <form class="form-inline">
                     <div class="form-group mx-sm-3 ">
-                        <input type="text" class="form-control" id="txtSearch" placeholder="search for Category name">
+                        <input type="text" class="form-control" id="txtSearch" placeholder="search for Supplier name">
                     </div>
                 </form>
             </div>
             <div class="col-2">
-                <button type="submit" class="btn btn-primary searchCategory">SEARCH</button>
+                <button type="submit" class="btn btn-primary searchSupplier">SEARCH</button>
             </div>
             <div class="col-2">
                 <button type="button" id="btnRefresh" class="btn btn-info">REFRESH</button>
             </div>
             <div class="col-3">
-                <button type="button" id="btnAdd" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCategory">ADD Category</button>
+                <button type="button" id="btnAdd" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalSupplier">ADD Supplier</button>
             </div>
         </div>
 
@@ -51,12 +51,12 @@
                 <thead>
                     <tr>
                         <th scope="col"><input type="checkbox" name="chkAll"></th>
-                        <th>Category namei</th>
+                        <th>Supplier name</th>
                         <th>Number book</th>
                         <th>Feature</th>
                     </tr>
                 </thead>
-                <tbody id="tableCategory">
+                <tbody id="tableSupplier">
 
                 </tbody>
             </table>
@@ -66,18 +66,18 @@
     </div>
 </body>
 <!-- Modal -->
-<div class="modal fade" id="modalCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalSupplier" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Add Category</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Add Supplier</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="categoryName" class="form-label">Category Name</label>
-                        <input type="text" class="form-control" id="categoryName">
+                        <label for="supplierName" class="form-label">Supplier Name</label>
+                        <input type="text" class="form-control" id="supplierName">
                     </div>
                 </form>
             </div>

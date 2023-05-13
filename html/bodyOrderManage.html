@@ -5,13 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/manager.css">
-    <link rel="icon" href="./img/logo.avif">
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css">
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/bootstrap.js"></script>
+    <script src="../js/orderManage.js"></script>
     <title>Document</title>
 </head>
 
@@ -21,36 +15,29 @@
         <div class="row m-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ Admin</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Quản lý đơn hàng</li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Order Management</li>
                 </ol>
             </nav>
         </div>
 
         <!-- search -->
         <div class="row border pt-3 pb-3 ml-1 bg-light">
-            <div class="col-5">
-                <form class="form-inline">
-                    <div class="form-group mx-sm-3 ">
-                        <label class="mr-5" for="">Tìm kiếm:</label>
-                        <input type="text" class="form-control" id="search" placeholder="Tìm kiếm">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                </form>
+            <div class="col-1">
+                <label class="float-end" for="">search Order:</label>
             </div>
             <div class="col-4">
-                <select class="custom-select search" style="width:45% ;">
-                    <option selected value="idorder">Tìm theo mã đơn hàng</option>
-                    <option value="phone">Tìm theo số điện thoại</option>
-                </select>
-                <select class="custom-select search" style="width:45% ;">
-                    <option selected value="dateincrease">Sắp xếp ngày mua tăng</option>
-                    <option value="datedecrease">Sắp xếp ngày mua giảm</option>
-                </select>
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 ">
+                        <input type="text" class="form-control" id="txtSearch" placeholder="search for phone">
+                    </div>
+                </form>
             </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-success">Hiển thị tất cả</button>
-
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary searchOrder">SEARCH</button>
+            </div>
+            <div class="col-2">
+                <button type="button" id="btnRefresh" class="btn btn-info">REFRESH</button>
             </div>
         </div>
 
@@ -59,71 +46,58 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col"><input type="checkbox" name="chkAll"></th>
-                        <th>Mã đơn hàng</th>
-                        <th>Số điện thoại</th>
-                        <th>Ngày mua</th>
-                        <th>Thành tiền</th>
-                        <th>Trạng thái thanh toán</th>
-                        <th>Trạng thái giao hàng</th>
-                        <th>Tác vụ</th>
+                        <th>OrderID</th>
+                        <th>Number Phone</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Feature</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" name="chkRow"></td>
-                        <td>dh1234655</td>
-                        <td>0961613087</td>
-                        <td>20/10/2022</td>
-                        <td>200000</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td><button type="button " class="btn btn-outline-warning ">Sửa</button>
-                            <button type="button " class="btn btn-outline-danger ">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="chkRow"></td>
-                        <td>dh1234655</td>
-                        <td>0961613087</td>
-                        <td>20/10/2022</td>
-                        <td>200000</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td><button type="button " class="btn btn-outline-warning ">Sửa</button>
-                            <button type="button " class="btn btn-outline-danger ">Xóa</button>
-                        </td>
-                    </tr>
-
-
+                <tbody id="tableOrder">
 
                 </tbody>
             </table>
         </div>
-
-        <!-- pagination -->
-        <div class="row justify-content-center mt-2">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
     </div>
 </body>
+<!-- Modal -->
+<div class="modal fade" id="modalOrder" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Order detail </h5><br>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row ">
+                    <div class="col-6 userCustomer justify-content-center">Ngjslakjdlakjs000</div>
+                    <div class="col-6 dateCreate">Ngjslakjdlakjs000</div>
+                </div>
+                <div class="row ">
+                    <h1>List book</h1>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Book title</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableOrderDetail">
+
+                    </tbody>
+                </table>
+                <div class="row">
+                    <h4 id="totalOrder">Total Order: </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </html>

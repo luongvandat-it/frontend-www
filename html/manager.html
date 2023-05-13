@@ -5,97 +5,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/Manage.css">
-    <link rel="icon" href="./img/logo.avif">
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/font-awesome.min.css">
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/bootstrap.js"></script>
+    <!-- <link rel=" icon " href="./img/logo.avif "> -->
+    <link rel="stylesheet" href="../css/manager.css">
+    <link rel="stylesheet " href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.6.4.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/admin.js"></script>
     <title>Quản lý</title>
 </head>
-<script>
-    $(function () {
-        $(".header").load("header.html")
-        $(".footer").load("footer.html")
-        $(".sub-btn").click(function () {
-            $(".sub-menu").slideToggle("slow")
-        });
-        $(".btnProductManage").click(function () {
-            $('.bodyql').load('./bodyProductManage.html')
-        });
-        $(".btnCategoryManage").click(function () {
-            $('.bodyql').load('./bodyCategoryManage.html')
-        });
-        $(".btnPublisherManage").click(function () {
-            $('.bodyql').load('./bodyPublisherManage.html')
-        });
-        $(".btnOrderManage").click(function () {
-            $('.bodyql').load('./bodyOrderManage.html')
-        });
-        $(".btnAccountManage").click(function () {
-            $('.bodyql').load('./bodyAccountManage.html')
-        });
-        $(".btnDashBoard").click(function () {
-            $('.bodyql').load('./bodyDashBoard.html')
-        });
-    });
-</script>
 
-<body>
-    <!-- header  -->
-    <div class="header"></div>
+<body class="container-fluid">
     <!-- body -->
-
-    <body class="container-fluid">
-        <div class="row">
-            <!-- menu -->
-            <menu class="col-2 bg-light">
-                <nav class="navbar navbar-expand-md navbar-light bg-light sidebar">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar">
-                        <span class="navbar-toggler-icon"></span>
+    <div class="row ">
+        <!-- menu -->
+        <menu class="col-2 bg-light ">
+            <nav class="navbar navbar-expand-md navbar-light bg-light sidebar ">
+                <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#sidebar ">
+                        <span class="navbar-toggler-icon "></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="sidebar">
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-item pt-2 pb-2">
-                                <a class="sub-link" href="#">Trang chủ Admin</a>
-                            </li>
-                            <li class="nav-item pt-2 pb-2">
-                                <a class="sub-btn" href="#">Quản lý sản phẩm</a>
-                                <ul class="sub-menu" style="display: none;">
-                                    <li class="nav-item pt-2 pb-2">
-                                        <a class="sub-link btnProductManage" href="#">Sản phẩm</a>
-                                    </li>
-                                    <li class="nav-item pt-2 pb-2">
-                                        <a class="sub-link btnCategoryManage" href="#">Thể loại</a>
-                                    </li>
-                                    <li class="nav-item pt-2 pb-2">
-                                        <a class="sub-link btnPublisherManage" href="#">Nhà xuất bản</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item pt-2 pb-2">
-                                <a class="sub-link btnOrderManage" href="#">Quản lý đơn hàng</a>
-                            </li>
-                            <li class="nav-item pt-2 pb-2">
-                                <a class="sub-link btnAccountManage" href="#">Quản lý tài khoản</a>
-                            </li>
-                            <li class="nav-item pt-2 pb-2">
-                                <a class="sub-link btnDashBoard" href="#">Thống kê</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </menu>
+                <div class="collapse navbar-collapse " id="sidebar ">
+                    <ul class="navbar-nav flex-column ">
+                        <li class="nav-item pt-2 pb-2 ">
+                            <a class="sub-btn " href="# ">Product Management</a>
+                            <ul class="sub-menu " style="display: none; ">
+                                <li class="nav-item pt-2 pb-2 ">
+                                    <a class="sub-link btnProductManage " href="# ">Products</a>
+                                </li>
+                                <li class="nav-item pt-2 pb-2 ">
+                                    <a class="sub-link btnAuthorManage " href="# ">Authors</a>
+                                </li>
+                                <li class="nav-item pt-2 pb-2 ">
+                                    <a class="sub-link btnCategoryManage " href="# ">Catagories</a>
+                                </li>
+                                <li class="nav-item pt-2 pb-2 ">
+                                    <a class="sub-link btnPublisherManage " href="# ">Publishers</a>
+                                </li>
+                                <li class="nav-item pt-2 pb-2 ">
+                                    <a class="sub-link btnSupplierManage " href="# ">Suppliers</a>
+                                </li>
+                            </ul>
+                        </li>
 
-            <!-- content là cái thay đổi -->
-            <!-- content -->
-            <div class="bodyql col-10"></div>
+                        <li class="nav-item pt-2 pb-2 ">
+                            <a class="sub-link btnOrderManage " href="# ">Order Management</a>
+                        </li>
+                        <li class="nav-item pt-2 pb-2 ">
+                            <a class="sub-link btnAccountManage " href="# ">Account Management</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </menu>
+
+        <!-- content là cái thay đổi -->
+        <!-- content -->
+        <div class="bodyql col-10 "></div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12 d-flex justify-content-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-
-    </body>
-    <!-- footer -->
-    <div class="footer "></div>
+    </div>
 </body>
 
 </html>

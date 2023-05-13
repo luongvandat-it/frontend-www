@@ -2,84 +2,82 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/payment.css">
-  <script src="../js/payment.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/payment.css">
+    <script src="../js/payment.js"></script>
 </head>
 
 <body>
-  <div class="container">
-    <h2 class="text-center text-primary mt-4"><b>CONFIRM PAYMENT</b></h2>
-    <form action="" method="post">
-      <div class="form-group mt-2">
-        <label for="name">Full Name:</label>
-        <input type="text" class="form-control" id="txtName" name="name" readonly />
-      </div>
-      <div class="form-group mt-2">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="txtEmail" name="email" readonly />
-      </div>
-      <div class="form-group mt-2">
-        <label for="phone">Phone Number:</label>
-        <input type="text" class="form-control" id="txtPhone" name="phone" readonly />
-      </div>
-      <div class="form-group mt-2">
-        <label for="address">Address:</label>
-        <input type="text" class="form-control" id="address" placeholder="Enter address ..." name="address" />
-      </div>
-      <div class="border p-4 mt-4">
-        <div class="form-group">
-          <label for="payment">Payment method:</label><br />
-          <input type="radio" name="paymentMethod" id="momo" />
-          <a id="clickMomo">
-            <img src="./imgs/static/momo.png" height="50px" /> Momo Wallet </a>
-          <br />
-          <input type="radio" name="paymentMethod" id="cast" checked />
-          <a id="clickCast">
-            <img src="./imgs/static/cast.jpg" height="50px" /> Cast
-          </a>
-        </div>
-      </div>
-      <div class="form-group mt-4">
-        <label for="note">Note:</label>
-        <textarea class="form-control" rows="5" id="note" name="note" placeholder="Message for Leaf Book here ..."
-          id="note"></textarea>
-      </div>
+    <div class="container">
+        <h2 class="text-center text-primary mt-4"><b>CONFIRM PAYMENT</b></h2>
+        <form action="" method="post">
+            <div class="form-group mt-2">
+                <label for="name">Full Name:</label>
+                <input type="text" class="form-control" id="txtName" name="name" readonly />
+            </div>
+            <div class="form-group mt-2">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="txtEmail" name="email" readonly />
+            </div>
+            <div class="form-group mt-2">
+                <label for="phone">Phone Number:</label>
+                <input type="text" class="form-control" id="txtPhone" name="phone" readonly />
+            </div>
+            <div class="form-group mt-2">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" placeholder="Enter address ..." name="address" />
+            </div>
+            <div class="border p-4 mt-4">
+                <div class="form-group">
+                    <label for="payment">Payment method:</label><br />
+                    <input type="radio" name="paymentMethod" id="momo" />
+                    <a id="clickMomo">
+                        <img src="./imgs/static/momo.png" height="50px" /> Momo Wallet </a>
+                    <br />
+                    <input type="radio" name="paymentMethod" id="cast" checked />
+                    <a id="clickCast">
+                        <img src="./imgs/static/cast.jpg" height="50px" /> Cast
+                    </a>
+                </div>
+            </div>
+            <div class="form-group mt-4">
+                <label for="note">Note:</label>
+                <textarea class="form-control" rows="5" id="note" name="note" placeholder="Message for Leaf Book here ..." id="note"></textarea>
+            </div>
 
-      <div class="form-group mt-4">
-        <label for="voucher">Voucher:</label>
-        <input type="text" class="form-control" id="voucher" placeholder="Enter discount" name="voucher" />
-      </div>
+            <div class="form-group mt-4">
+                <label for="voucher">Voucher:</label>
+                <input type="text" class="form-control" id="voucher" placeholder="Enter discount" name="voucher" />
+            </div>
 
-      <div class="mt-4">
-        <p>Selected book(s) to buy: </p>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
+            <div class="mt-4">
+                <p>Selected book(s) to buy: </p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-          </tbody>
-        </table>
-      </div>
-    </form>
-    <div class="text-danger" id="errPayment"></div>
-    <div class="row">
-      <button class="btn-block btn-success mb-5 mr-3 ml-3 p-3" style="border: none; border-radius: 4px;"
-        id="btnConfirmPay">
+                    </tbody>
+                </table>
+            </div>
+        </form>
+        <div class="text-danger" id="errPayment"></div>
+        <div class="row">
+            <button class="btn-block btn-success mb-5 mr-3 ml-3 p-3" style="border: none; border-radius: 4px;" id="btnConfirmPay">
         Confirm Payment
       </button>
+        </div>
     </div>
-  </div>
 </body>
 
 </html>

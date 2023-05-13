@@ -1,11 +1,14 @@
 function checkLogin() {
     if (localStorage.getItem("emailLogin") != null) {
+        if (localStorage.getItem('roleN') != null) {
+            $("#admin").css("display", "block");
+        }
         $("#btnLogin").hide();
         $("#btnLogout").removeAttr("hidden");
         $("#hiUser").removeAttr("hidden");
         $.ajax({
             url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + localStorage.getItem("emailLogin"),
-            success: function (data) {
+            success: function(data) {
                 $("#hiUser").text("Hi, " + data.userFirstName + " " + data.userLastName);
             }
         });
@@ -14,22 +17,23 @@ function checkLogin() {
     return false;
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     // Check Login
     checkLogin();
-
     // Logout
-    $("#btnLogout").click(function () {
+    $("#btnLogout").click(function() {
         localStorage.removeItem("emailLogin");
         $("#btnLogout").hide();
         $("#btnLogin").removeAttr("hidden");
         $("#hiUser").hide();
+        $("#admin").css("display", "none");
+        localStorage.removeItem('roleN', null)
     });
 
     // Load content home page
     $('#content').load('./html/home.html');
     var navbar = $(".navbar-container");
-    $(window).scroll(function () {
+    $(window).scroll(function() {
         if ($(window).scrollTop() > navbar.position().top) {
             navbar.addClass("sticky-navbar");
         } else {
@@ -38,13 +42,13 @@ $(document).ready(function () {
     });
 
     // Header - Search
-    $('#searchForm').submit(function (e) {
+    $('#searchForm').submit(function(e) {
         e.preventDefault();
         $('#content').load('./html/home.html');
         $('#searchResult').html("");
         $.ajax({
             url: "http://localhost:8080/api/books/search/findBooksByBookTitleContainsIgnoreCase?bookTitle=" + $('#searchBookTitle').val(),
-            success: function (data) {
+            success: function(data) {
                 var books = data._embedded.books;
                 var content = "";
                 content += '<div class="col-12 mt-2">';
@@ -79,19 +83,19 @@ $(document).ready(function () {
     });
 
     // Header - Cart
-    $('#showCart').click(function () {
+    $('#showCart').click(function() {
         $('#searchResult').html('');
         $('#content').load('./html/cart.html');
     });
-    $('#btnCartToPay').click(function () {
+    $('#btnCartToPay').click(function() {
         $('#content').load('../html/payment.html');
     });
 
     // Header - Login
-    $("#btnLogin").click(function () {
+    $("#btnLogin").click(function() {
         $("#loginModal").modal();
     });
-    $("#btnSubmitLogin").click(function () {
+    $("#btnSubmitLogin").click(function() {
         var email = $("#txtEmailLogin").val();
         var pass = $("#txtPassLogin").val();
         var regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
@@ -105,11 +109,24 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + email,
-                error: function () {
+                error: function() {
                     $("#errLogin").text("Email Not Found");
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.userPassword == pass) {
+                        console.log(data._links.role.href)
+                        $.ajax({
+                            url: data._links.role.href + "",
+                            success: function(_role) {
+                                console.log(_role.roleName)
+                                if (_role.roleName === 'Admin') {
+                                    localStorage.setItem('roleN', _role.roleName)
+                                    console.log(localStorage.getItem('roleN'))
+                                    $("#admin").css("display", "block");
+                                }
+                            }
+                        })
+
                         $("#errLogin").text("");
                         $("#btnLogin").hide();
                         $("#btnSubmitLoginClose").click();
@@ -119,12 +136,13 @@ $(document).ready(function () {
                     }
                 }
             });
+
             $("#btnLogin").attr("hidden");
             $("#btnLogout").removeAttr("hidden");
             $("#hiUser").removeAttr("hidden");
             $.ajax({
                 url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail?email=" + email,
-                success: function (data) {
+                success: function(data) {
                     $("#hiUser").text("Hi, " + data.userFirstName + " " + data.userLastName);
                 }
             });
@@ -133,14 +151,14 @@ $(document).ready(function () {
     });
 
     // Header - Switch Login to Register
-    $("#notHaveAccount").click(function () {
+    $("#notHaveAccount").click(function() {
         $("#btnSubmitLoginClose").click();
         $("#loginModal").modal("hide");
         $("#registerModal").modal();
     });
 
     // Header - Register
-    $("#btnSubmitRegister").click(function () {
+    $("#btnSubmitRegister").click(function() {
         var name = $("#txtName").val().trim();
         var fullname = name.split(" ");
         var firstName = fullname[0];
@@ -186,7 +204,7 @@ $(document).ready(function () {
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(userAdd),
-                success: function (data) {
+                success: function(data) {
                     $("#btnSubmitRegisterClose").click();
                     $("#registerModal").modal("hide");
                     $("#btnLogin").hide();
@@ -196,7 +214,8 @@ $(document).ready(function () {
                     localStorage.setItem("emailLogin", email);
                     location.reload();
                     alert(data);
-                }, error: function (data) {
+                },
+                error: function(data) {
                     alert(data);
                 }
             });
@@ -207,12 +226,12 @@ $(document).ready(function () {
     });
 
     // Navbar - Home
-    $('#showHome').click(function () {
+    $('#showHome').click(function() {
         $('#content').load('../html/home.html');
     });
 
     // Navbar - Sales
-    $('#showSales').click(function () {
+    $('#showSales').click(function() {
         $('#content').load('./html/home.html');
         $('html, body').animate({
             scrollTop: $("#contentSales").offset().top - 100
@@ -220,7 +239,7 @@ $(document).ready(function () {
     });
 
     // Navbar - Orders
-    $('#showOrders').click(function () {
+    $('#showOrders').click(function() {
         if (localStorage.getItem('emailLogin') == null) {
             $('#btnLogin').click();
             return false;
@@ -229,17 +248,21 @@ $(document).ready(function () {
     });
 
     // showOrderDetail
-    $(document).on('click', '.showOrderDetail', function () {
+    $(document).on('click', '.showOrderDetail', function() {
         $('#content').load('../html/orderDetails.html');
     });
 
     // Navbar - About
-    $('#showIntroduction').click(function () {
+    $('#showIntroduction').click(function() {
         $('#content').load('../html/introduction.html');
     });
 
+    // Navbar - Admin
+    $('#admin').click(function() {
+        $('#content').load('../html/manager.html');
+    });
     // Book - Add to cart
-    $(document).on('click', '.btnAddToCard', function () {
+    $(document).on('click', '.btnAddToCard', function() {
         var bookName = $(this).parent().parent().parent().find('#bookName').text();
         var bookPrice = $(this).parent().parent().parent().find('#bookPrice').text();
         var bookImage = $(this).parent().parent().parent().find('#bookImage').attr('src');
@@ -275,7 +298,7 @@ $(document).ready(function () {
     });
 
     // Book - Details
-    $(document).on('click', '.bookCardImage', function () {
+    $(document).on('click', '.bookCardImage', function() {
         var bookNameShowDetail = $(this).parent().parent().find('#bookName').text();
         localStorage.setItem('bookNameShowDetail', bookNameShowDetail);
         $('#content').load('../html/details.html');
