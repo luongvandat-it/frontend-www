@@ -10,7 +10,7 @@ async function loadAuthor(page) {
             for (var i = 0; i < authors.length; i++) {
                 var table = '';
                 table += '<tr>'
-                table += '<td><input type="checkbox" name="chkRow"></td>'
+
                 table += '<td>' + authors[i].authorName + '</td>'
                 var authorId = authors[i]._links.self.href.substring(authors[i]._links.self.href.lastIndexOf("/") + 1);
                 $.ajax({
@@ -46,7 +46,7 @@ function searchAuthorByName(name, offset) {
             for (var i = 0; i < authors.length; i++) {
                 var table = '';
                 table += '<tr>'
-                table += '<td><input type="checkbox" name="chkRow"></td>'
+
                 table += '<td>' + authors[i].authorName + '</td>'
                 var authorId = authors[i]._links.self.href.substring(authors[i]._links.self.href.lastIndexOf("/") + 1);
                 $.ajax({
@@ -265,7 +265,7 @@ $(document).ready(function() {
     $('#tableAuthor').on('click', '#deleteAuthor', function() {
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let name = row.find('td:eq(1)').text();
+        let name = row.find('td:eq(0)').text();
         // Hiển thị giá trị email
         deleteAuthor(name)
     });
@@ -275,7 +275,7 @@ $(document).ready(function() {
         $('#submitModal').html('Edit')
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let name = row.find('td:eq(1)').text();
+        let name = row.find('td:eq(0)').text();
         // Hiển thị giá trị email
         $("#authorName").val(name)
         localStorage.setItem('name', name)

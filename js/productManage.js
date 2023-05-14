@@ -10,7 +10,7 @@ async function loadProduct(page) {
             for (var i = 0; i < books.length; i++) {
                 var table = '';
                 table += '<tr>';
-                table += '<td><input type="checkbox" name="chkRow"></td>';
+
                 table += '<td>' + books[i].bookTitle + '</td>';
                 $.ajax({
                     url: books[i]._links.category.href,
@@ -56,7 +56,7 @@ function searchBookByTitle(title) {
             for (var i = 0; i < books.length; i++) {
                 var table = '';
                 table += '<tr>';
-                table += '<td><input type="checkbox" name="chkRow"></td>';
+
                 table += '<td>' + books[i].bookTitle + '</td>';
                 $.ajax({
                     url: books[i]._links.category.href,
@@ -487,7 +487,7 @@ $(document).ready(function() {
     $('#tableProduct').on('click', '#deleteBook', function() {
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let bookTitle = row.find('td:eq(1)').text();
+        let bookTitle = row.find('td:eq(0)').text();
         // Hiển thị giá trị email
         deleteBook(bookTitle)
     });
@@ -495,7 +495,7 @@ $(document).ready(function() {
     $('#tableProduct').on('click', '#editBook', function() {
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let bookTitle = row.find('td:eq(1)').text();
+        let bookTitle = row.find('td:eq(0)').text();
         // Hiển thị giá trị email
         loadValueModal(bookTitle)
     });

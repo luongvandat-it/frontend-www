@@ -10,7 +10,6 @@ async function loadAccount(page) {
             for (var i = 0; i < users.length; i++) {
                 var table = '';
                 table += '<tr>'
-                table += '<td><input type="checkbox" name="chkRow"></td>'
                 table += '<td>' + users[i].userFirstName + ' ' + users[i].userLastName + '</td>'
                 table += '<td>' + users[i].userPhoneNumber + '</td>'
                 table += '<td>' + users[i].userEmail + '</td>'
@@ -45,7 +44,6 @@ function searchUserByPhone(phone, offset) {
             for (var i = 0; i < users.length; i++) {
                 var table = '';
                 table += '<tr>'
-                table += '<td><input type="checkbox" name="chkRow"></td>'
                 table += '<td>' + users[i].userName + '</td>'
                 table += '<td>' + users[i].userFirstName + ' ' + users[i].userLastName + '</td>'
                 table += '<td>' + users[i].userPhoneNumber + '</td>'
@@ -261,6 +259,9 @@ function loadValueModal(email) {
     $('#userEmail').prop('disabled', true);
     $('#userPassword').prop('disabled', true);
     $('#userRePassword').prop('disabled', true);
+    $('#userFirstName').prop('disabled', true);
+    $('#userLastName').prop('disabled', true);
+    $("#userPhoneNumber").prop('disabled', true);
     $.ajax({
         url: "http://localhost:8080/api/user_s/search/findUser_ByUserEmail",
         data: {
@@ -297,60 +298,53 @@ function editAccount() {
     var regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
     var regexPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 
-    if (regexName.test(fullname) == false) {
-        $("#errRegisterAccount").text("Invalid Name!");
-        return
-    } else if (regexPhone.test(phone) == false) {
-        $("#errRegisterAccount").text("Invalid Phone Number!");
-        return
-    } else {
-        $("#errRegisterAccount").text("*");
-        var role = $('.role option:selected').text()
-        var roleId = ''
-        $.ajax({
-            url: "http://localhost:8080/api/roles/search/findRoleByRoleNameIgnoreCase",
-            data: {
-                roleName: role
-            },
-            async: false,
-            success: function(data) {
-                let str = data._links.self.href
-                roleId += str.substring(str.lastIndexOf("/") + 1);
-            },
-            error: function(data) {
-                alert(data);
-            }
-        });
+    $("#errRegisterAccount").text("*");
+    var role = $('.role option:selected').text()
+    var roleId = ''
+    $.ajax({
+        url: "http://localhost:8080/api/roles/search/findRoleByRoleNameIgnoreCase",
+        data: {
+            roleName: role
+        },
+        async: false,
+        success: function(data) {
+            let str = data._links.self.href
+            roleId += str.substring(str.lastIndexOf("/") + 1);
+        },
+        error: function(data) {
+            alert(data);
+        }
+    });
 
-        var userAdd = {
-            userName: fullname,
-            userFirstName: firstName,
-            userLastName: lastName,
-            userPhoneNumber: phone,
-            userEmail: email,
-            role: {
-                roleId: roleId
-            }
-        };
+    var userAdd = {
+        userName: fullname,
+        userFirstName: firstName,
+        userLastName: lastName,
+        userPhoneNumber: phone,
+        userEmail: email,
+        role: {
+            roleId: roleId
+        }
+    };
 
-        $.ajax({
-            url: "http://localhost:8080/api/user_s/updateUser",
-            type: "PUT",
-            contentType: "application/json",
-            data: JSON.stringify(userAdd),
-            async: false,
-            success: function(data) {
-                alert(data)
-                reloadBody()
-            },
-            error: function(data) {
-                alert(data);
-            }
-        });
+    $.ajax({
+        url: "http://localhost:8080/api/user_s/updateUser",
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(userAdd),
+        async: false,
+        success: function(data) {
+            alert(data)
+            reloadBody()
+        },
+        error: function(data) {
+            alert(data);
+        }
+    });
 
-        // sent email sign up
-        $.get("http://localhost:8080/api/user_s/mail?email=" + email + "&text=Update+successful.");
-    }
+    // sent email sign up
+    $.get("http://localhost:8080/api/user_s/mail?email=" + email + "&text=Update+successful.");
+
 }
 
 function setModalAdd() {
@@ -360,6 +354,9 @@ function setModalAdd() {
     $('#userEmail').prop('disabled', false);
     $('#userPassword').prop('disabled', false);
     $('#userRePassword').prop('disabled', false);
+    $('#userFirstName').prop('disabled', false);
+    $('#userLastName').prop('disabled', false);
+    $("#userPhoneNumber").prop('disabled', false);
     $('#userFirstName').val('');
     $('#userLastName').val('');
     $("#userPhoneNumber").val('');
@@ -404,9 +401,7 @@ $(document).ready(function() {
     //deleteUser
     $('#tableAccount').on('click', '#deleteAccount', function() {
         let row = $(this).closest('tr');
-        // Lấy giá trị email trong ô thứ hai của hàng đó
-        let mail = row.find('td:eq(3)').text();
-        // Hiển thị giá trị email
+        let mail = row.find('td:eq(2)').text();
 
         deleteUser(mail.trim())
     });
@@ -414,7 +409,7 @@ $(document).ready(function() {
     $('#tableAccount').on('click', '#editAccount', function() {
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let mail = row.find('td:eq(3)').text();
+        let mail = row.find('td:eq(2)').text();
         // Hiển thị giá trị email
         loadValueModal(mail)
     });

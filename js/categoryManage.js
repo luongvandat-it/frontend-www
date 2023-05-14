@@ -10,7 +10,7 @@ async function loadCategory(page) {
             for (var i = 0; i < categories.length; i++) {
                 var table = '';
                 table += '<tr>'
-                table += '<td><input type="checkbox" name="chkRow"></td>'
+
                 table += '<td>' + categories[i].categoryName + '</td>'
                 var categoryId = categories[i]._links.self.href.substring(categories[i]._links.self.href.lastIndexOf("/") + 1);
                 $.ajax({
@@ -46,7 +46,7 @@ function searchCategoryByName(name, offset) {
             for (var i = 0; i < categories.length; i++) {
                 var table = '';
                 table += '<tr>'
-                table += '<td><input type="checkbox" name="chkRow"></td>'
+
                 table += '<td>' + categories[i].categoryName + '</td>'
                 var categoryId = categories[i]._links.self.href.substring(categories[i]._links.self.href.lastIndexOf("/") + 1);
                 $.ajax({
@@ -251,9 +251,9 @@ $(document).ready(function() {
     loadPaganition()
         //add
     $("#submitModal").click(function() {
-        if ($(this).text() === 'Add')
+        if ($(this).text() === 'Add') {
             addCategory()
-        else {
+        } else {
             var name = localStorage.getItem('name')
             editCategory(name)
         }
@@ -267,7 +267,7 @@ $(document).ready(function() {
     $('#tableCategory').on('click', '#deleteCategory', function() {
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let name = row.find('td:eq(1)').text();
+        let name = row.find('td:eq(0)').text();
         // Hiển thị giá trị email
         deleteCategory(name)
     });
@@ -277,10 +277,9 @@ $(document).ready(function() {
         $('#submitModal').html('Edit')
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let name = row.find('td:eq(1)').text();
+        let name = row.find('td:eq(0)').text();
         // Hiển thị giá trị email
         $("#categoryName").val(name)
         localStorage.setItem('name', name)
     });
-
 });

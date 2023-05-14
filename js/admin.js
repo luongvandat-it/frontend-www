@@ -28,4 +28,5 @@ $(document).ready(function() {
     $(".btnSupplierManage").click(function() {
         $('.bodyql').load('../html/bodySupplierManage.html')
     });
+
 })

@@ -10,7 +10,7 @@ async function loadSupplier(page) {
             for (var i = 0; i < suppliers.length; i++) {
                 var table = '';
                 table += '<tr>'
-                table += '<td><input type="checkbox" name="chkRow"></td>'
+
                 table += '<td>' + suppliers[i].supplierName + '</td>'
                 var supplierId = suppliers[i]._links.self.href.substring(suppliers[i]._links.self.href.lastIndexOf("/") + 1);
                 $.ajax({
@@ -51,7 +51,7 @@ function searchSupplierByName(name, offset) {
             for (var i = 0; i < suppliers.length; i++) {
                 var table = '';
                 table += '<tr>'
-                table += '<td><input type="checkbox" name="chkRow"></td>'
+
                 table += '<td>' + suppliers[i].supplierName + '</td>'
                 var supplierId = suppliers[i]._links.self.href.substring(suppliers[i]._links.self.href.lastIndexOf("/") + 1);
                 $.ajax({
@@ -265,7 +265,7 @@ $(document).ready(function() {
     $('#tableSupplier').on('click', '#deleteSupplier', function() {
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let name = row.find('td:eq(1)').text();
+        let name = row.find('td:eq(0)').text();
         // Hiển thị giá trị email
         deleteSupplier(name)
     });
@@ -275,7 +275,7 @@ $(document).ready(function() {
         $('#submitModal').html('Edit')
         let row = $(this).closest('tr');
         // Lấy giá trị email trong ô thứ hai của hàng đó
-        let name = row.find('td:eq(1)').text();
+        let name = row.find('td:eq(0)').text();
         // Hiển thị giá trị email
         $("#supplierName").val(name)
         localStorage.setItem('name', name)
